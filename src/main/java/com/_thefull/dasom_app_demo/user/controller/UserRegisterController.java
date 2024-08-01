@@ -1,9 +1,9 @@
-package com._thefull.dasom_app_demo.controller;
+package com._thefull.dasom_app_demo.user.controller;
 
 
-import com._thefull.dasom_app_demo.domain.dto.UserRegisterRequestDto;
-import com._thefull.dasom_app_demo.domain.dto.UserRegisterResponseDto;
-import com._thefull.dasom_app_demo.service.UserRegisterService;
+import com._thefull.dasom_app_demo.user.domain.dto.UserRegisterRequestDto;
+import com._thefull.dasom_app_demo.user.domain.dto.UserRegisterResponseDto;
+import com._thefull.dasom_app_demo.user.service.UserRegisterService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

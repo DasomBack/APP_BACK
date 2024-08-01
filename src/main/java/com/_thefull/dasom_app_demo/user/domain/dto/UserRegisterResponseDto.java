@@ -1,4 +1,4 @@
-package com._thefull.dasom_app_demo.domain.dto;
+package com._thefull.dasom_app_demo.user.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
