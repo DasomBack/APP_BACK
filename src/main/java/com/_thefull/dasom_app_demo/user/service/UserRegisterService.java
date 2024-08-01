@@ -1,8 +1,8 @@
-package com._thefull.dasom_app_demo.service;
+package com._thefull.dasom_app_demo.user.service;
 
-import com._thefull.dasom_app_demo.domain.User;
-import com._thefull.dasom_app_demo.domain.dto.UserRegisterRequestDto;
-import com._thefull.dasom_app_demo.repository.UserRepository;
+import com._thefull.dasom_app_demo.user.domain.User;
+import com._thefull.dasom_app_demo.user.domain.dto.UserRegisterRequestDto;
+import com._thefull.dasom_app_demo.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

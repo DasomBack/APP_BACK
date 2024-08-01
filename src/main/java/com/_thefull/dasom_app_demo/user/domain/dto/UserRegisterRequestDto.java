@@ -1,9 +1,8 @@
-package com._thefull.dasom_app_demo.domain.dto;
+package com._thefull.dasom_app_demo.user.domain.dto;
 
-import com._thefull.dasom_app_demo.domain.User;
+import com._thefull.dasom_app_demo.user.domain.User;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -32,7 +31,6 @@ public class UserRegisterRequestDto {
 
     public User toEntity(){
         return User.builder()
-                .store(this.store)
                 .email(this.email)
                 .name(this.name)
                 .phoneNum(this.phoneNum)
