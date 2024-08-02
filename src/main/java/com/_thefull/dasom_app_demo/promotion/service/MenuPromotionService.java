@@ -1,14 +1,19 @@
 package com._thefull.dasom_app_demo.promotion.service;
 
 import com._thefull.dasom_app_demo.global.Status;
+import com._thefull.dasom_app_demo.global.exception.AppException;
+import com._thefull.dasom_app_demo.global.exception.ErrorCode;
 import com._thefull.dasom_app_demo.menu.domain.Category;
+import com._thefull.dasom_app_demo.menu.domain.Menu;
+import com._thefull.dasom_app_demo.menu.repository.MenuRepository;
 import com._thefull.dasom_app_demo.promotion.domain.MenuPromotion;
-import com._thefull.dasom_app_demo.promotion.domain.dto.CreateMenuPromotionRequestDTO;
-import com._thefull.dasom_app_demo.promotion.domain.dto.CreateMenuPromotionResponseDTO;
+import com._thefull.dasom_app_demo.promotion.domain.dto.MenuPromotionRequestDTO;
+import com._thefull.dasom_app_demo.promotion.domain.dto.MenuPromotionResponseDTO;
 import com._thefull.dasom_app_demo.promotion.domain.dto.MenuPromotionListResponseDTO;
 import com._thefull.dasom_app_demo.promotion.domain.dto.SimpleMenuPromoResponseDTO;
 import com._thefull.dasom_app_demo.promotion.repository.MenuPromotionRepository;
 import com._thefull.dasom_app_demo.store.domain.Store;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,10 +23,26 @@ import java.util.List;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MenuPromotionService {
 
     private final MenuPromotionRepository menuPromotionRepository;
+    private final MenuRepository menuRepository;
+
+    public MenuPromotionResponseDTO createMenuPromotion(MenuPromotionRequestDTO dto, Store store) {
+        Menu menu = menuRepository.findById(dto.getMenuId())
+                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
+
+        Status status = Status.determinStatusFromDate(dto.getPromoStartDate(), dto.getPromoEndDate());
+
+        MenuPromotion newPromotion = dto.from(menu, status, store);
+
+        MenuPromotion saved = menuPromotionRepository.save(newPromotion);
+
+        return MenuPromotionResponseDTO.from(saved);
+
+    }
 
 
     public MenuPromotionListResponseDTO findAllMenuPromoListByCategory(Store store, String categoryname) {
@@ -52,10 +73,26 @@ public class MenuPromotionService {
 
     }
 
-//    public CreateMenuPromotionResponseDTO create(CreateMenuPromotionRequestDTO dto) {
-//
-//
-//    }
 
+    public MenuPromotionResponseDTO updateMenuPromotion(Long id,MenuPromotionRequestDTO dto) {
+        MenuPromotion menuPromotion = menuPromotionRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "제품 홍보를 찾을 수 없습니다"));
+        Menu menu = menuRepository.findById(dto.getMenuId())
+                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
 
+        menuPromotion.updateMenuPromotion(dto,menu);
+
+        MenuPromotion saved = menuPromotionRepository.save(menuPromotion);
+        return MenuPromotionResponseDTO.from(saved);
+    }
+
+    public void deleteMenuPromotion(Long id) {
+        menuPromotionRepository.deleteById(id);
+    }
+
+    public MenuPromotionResponseDTO findById(Long id) {
+        MenuPromotion menuPromotion = menuPromotionRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "제품 홍보를 찾을 수 없습니다"));
+        return MenuPromotionResponseDTO.from(menuPromotion);
+    }
 }
