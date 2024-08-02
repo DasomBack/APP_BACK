@@ -1,5 +1,6 @@
 package com._thefull.dasom_app_demo.store.domain;
 
+import com._thefull.dasom_app_demo.global.BaseEntity;
 import com._thefull.dasom_app_demo.menu.domain.Menu;
 import com._thefull.dasom_app_demo.promotion.domain.MenuPromotion;
 import com._thefull.dasom_app_demo.user.domain.User;
@@ -18,7 +19,7 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Getter
-public class Store {
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

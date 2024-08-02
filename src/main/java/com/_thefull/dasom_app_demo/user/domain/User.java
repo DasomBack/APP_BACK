@@ -1,6 +1,7 @@
 package com._thefull.dasom_app_demo.user.domain;
 
 
+import com._thefull.dasom_app_demo.global.BaseEntity;
 import com._thefull.dasom_app_demo.store.domain.Store;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +18,7 @@ import java.util.List;
 @Entity(name = "USER")
 @EntityListeners(AuditingEntityListener.class)
 @Builder
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

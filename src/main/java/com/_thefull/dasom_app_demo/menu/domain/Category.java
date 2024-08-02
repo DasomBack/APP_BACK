@@ -16,9 +16,9 @@ public enum Category {
     ALL(5, "전체","전체");
 
 
-    private int categoryNum;
-    private String categoryName;
-    private String simpleName;
+    private final int categoryNum;
+    private final String categoryName;
+    private final String simpleName;
 
 
     public static Category fromCategoryNum(int categoryNum){

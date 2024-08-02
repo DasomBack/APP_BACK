@@ -5,6 +5,8 @@ import com._thefull.dasom_app_demo.global.exception.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 @Getter
 @AllArgsConstructor
 public enum Status {
@@ -41,5 +43,16 @@ public enum Status {
             }
         }
         throw new AppException(ErrorCode.INVALID_STATE,"확인되지 않은 상태입니다");
+    }
+
+    public static Status determinStatusFromDate(LocalDate startDate, LocalDate endDate){
+        LocalDate now = LocalDate.now();
+        if (startDate.isBefore(now))
+            return Status.SCHEDULED;
+        else if(endDate.isAfter(now))
+            return Status.COMPLETED;
+        else
+            return Status.IN_PROGRESS;
+
     }
 }

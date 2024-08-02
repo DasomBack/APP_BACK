@@ -1,5 +1,6 @@
 package com._thefull.dasom_app_demo.store.domain;
 
+import com._thefull.dasom_app_demo.store.service.DayConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -22,17 +23,17 @@ public class StoreOperatingHours {
 
     // 7 1 2 3 4 5 6
     @Column(columnDefinition = "TINYINT")
-    @NotNull
-    private int day;
+    @NotNull @Convert(converter = DayConverter.class)
+    private Day day;
 
     @Column(name = "is_opr")
-    private boolean isOpr;
+    private Boolean boolIsOpr;
 
     @Column(name = "open_time")
-    private LocalTime OpenTime;
+    private LocalTime openTime;
 
     @Column(name = "close_time")
-    private LocalTime CloseTime;
+    private LocalTime closeTime;
 
     @Column(name = "break_start_time")
     private LocalTime breakStartTime;
