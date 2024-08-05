@@ -89,7 +89,7 @@ public class MenuPromotionsController {
 
     @PutMapping
     public ResponseEntity<MenuPromotionResponseDTO> updateMenuPromotion(@RequestParam(name = "id")Long id,
-                                                                        final MenuPromotionRequestDTO requestDTO){
+                                                                        @RequestBody final MenuPromotionRequestDTO requestDTO){
         MenuPromotionResponseDTO responseDTO = menuPromotionService.updateMenuPromotion(id,requestDTO);
 
         return ResponseEntity.ok().body(responseDTO);
