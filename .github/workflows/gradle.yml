@@ -55,6 +55,7 @@ jobs:
         host: ${{ secrets.SERVER_IP }}
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SECRET }}
+        port: 22
         script: |
           # docker stop backentc
           # docker rm $(docker ps -a --filter "status=exited" -q)
