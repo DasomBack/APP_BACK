@@ -5,12 +5,10 @@ import com._thefull.dasom_app_demo.domain.user.domain.dto.UserRegisterRequestDto
 import com._thefull.dasom_app_demo.domain.user.domain.dto.UserRegisterResponseDTO;
 import com._thefull.dasom_app_demo.domain.user.service.UserRegisterService;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,4 +26,6 @@ public class UserRegisterController {
 
         return ResponseEntity.ok().body(response);
     }
+
+
 }

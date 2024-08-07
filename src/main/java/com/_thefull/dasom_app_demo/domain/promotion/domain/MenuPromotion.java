@@ -1,8 +1,6 @@
 package com._thefull.dasom_app_demo.domain.promotion.domain;
 
 import com._thefull.dasom_app_demo.global.BaseEntity;
-import com._thefull.dasom_app_demo.global.Status;
-import com._thefull.dasom_app_demo.global.StatusConverter;
 import com._thefull.dasom_app_demo.domain.menu.domain.Category;
 import com._thefull.dasom_app_demo.domain.menu.domain.CategoryConverter;
 import com._thefull.dasom_app_demo.domain.menu.domain.Menu;
