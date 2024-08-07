@@ -1,6 +1,6 @@
 package com._thefull.dasom_app_demo.domain.promotion.repository;
 
-import com._thefull.dasom_app_demo.global.Status;
+import com._thefull.dasom_app_demo.domain.promotion.domain.Status;
 import com._thefull.dasom_app_demo.domain.menu.domain.Category;
 import com._thefull.dasom_app_demo.domain.promotion.domain.MenuPromotion;
 import com._thefull.dasom_app_demo.domain.store.domain.Store;
