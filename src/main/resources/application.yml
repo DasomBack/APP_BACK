@@ -1,4 +1,6 @@
 spring:
+  jwt:
+    secret: b2f6d3bceaa8c8f8f6a2f8e5b1f7a3c9d2b4e5b1e3f8a6b7e9f6c7d4e8a9b1c7d2e5a6f3b4e8c1f9e5c8a3e7f2a6c9e3b4f6c1a9e8
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dasomapp?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8

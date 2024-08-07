@@ -1,6 +1,6 @@
 package com._thefull.dasom_app_demo.domain.promotion.domain.dto;
 
-import com._thefull.dasom_app_demo.global.Status;
+import com._thefull.dasom_app_demo.domain.promotion.domain.Status;
 import com._thefull.dasom_app_demo.domain.menu.domain.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
