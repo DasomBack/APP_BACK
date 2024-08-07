@@ -1,4 +1,4 @@
-package com._thefull.dasom_app_demo.global;
+package com._thefull.dasom_app_demo.domain.promotion.domain;
 
 import com._thefull.dasom_app_demo.global.exception.AppException;
 import com._thefull.dasom_app_demo.global.exception.ErrorCode;
