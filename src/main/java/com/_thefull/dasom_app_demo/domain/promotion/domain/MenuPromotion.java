@@ -1,5 +1,6 @@
 package com._thefull.dasom_app_demo.domain.promotion.domain;
 
+import com._thefull.dasom_app_demo.domain.promotion.domain.dto.UpdateMenuPromotionRequestDTO;
 import com._thefull.dasom_app_demo.global.BaseEntity;
 import com._thefull.dasom_app_demo.domain.menu.domain.Category;
 import com._thefull.dasom_app_demo.domain.menu.domain.CategoryConverter;
@@ -150,11 +151,12 @@ public class MenuPromotion extends BaseEntity {
         this.status=status;
     }
 
-    public void updateMenuPromotion(MenuPromotionRequestDTO dto, Menu menu){
+    public void updateMenuPromotion(UpdateMenuPromotionRequestDTO dto, Menu menu){
         Status _status = Status.determinStatusFromDate(dto.getPromoStartDate(), dto.getPromoEndDate());
+        Status status = Status.fromStatusName(dto.getStatus());
 
         this.category=menu.getCategory();
-        this.status=_status;
+        this.status=status;
         this.discType=DiscType.fromName(dto.getDateType());
         this.discVal=dto.getDiscVal();
         this.dateType= DateType.fromName(dto.getDateType());
