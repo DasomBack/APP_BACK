@@ -1,10 +1,10 @@
 package com._thefull.dasom_app_demo.domain.promotion.domain.dto;
 
-import com._thefull.dasom_app_demo.domain.promotion.domain.Status;
 import com._thefull.dasom_app_demo.domain.menu.domain.Menu;
 import com._thefull.dasom_app_demo.domain.promotion.domain.DateType;
 import com._thefull.dasom_app_demo.domain.promotion.domain.DiscType;
 import com._thefull.dasom_app_demo.domain.promotion.domain.MenuPromotion;
+import com._thefull.dasom_app_demo.domain.promotion.domain.Status;
 import com._thefull.dasom_app_demo.domain.store.domain.Store;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +14,12 @@ import java.time.LocalTime;
 
 @Getter
 @NoArgsConstructor
-public class MenuPromotionRequestDTO {
+public class UpdateMenuPromotionRequestDTO {
 
     // 메뉴 ID
     private Long menuId;
+
+    private String status;
 
     // 할인 금액 타입
     // % 할인 : PERCENT
@@ -60,7 +62,6 @@ public class MenuPromotionRequestDTO {
 
     // 제품 소개 추가 여부
     private boolean boolAddMenuDesc;
-
     // 제품 추가 소개
     private String addMenuDesc;
 
@@ -68,7 +69,9 @@ public class MenuPromotionRequestDTO {
     private String ment;
 
 
-    public MenuPromotion from(Menu menu, Status status, Store store){
+    public MenuPromotion from(Menu menu,Store store){
+        Status status = Status.fromStatusName(this.status);
+
         return MenuPromotion.builder()
                 .use(true)
                 .category(menu.getCategory())
@@ -94,6 +97,4 @@ public class MenuPromotionRequestDTO {
                 .build();
 
     }
-
-
 }
