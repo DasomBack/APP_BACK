@@ -1,6 +1,6 @@
 package com._thefull.dasom_app_demo.domain.promotion.repository;
 
-import com._thefull.dasom_app_demo.global.Status;
+import com._thefull.dasom_app_demo.domain.promotion.domain.Status;
 import com._thefull.dasom_app_demo.domain.menu.domain.Category;
 import com._thefull.dasom_app_demo.domain.promotion.domain.MenuPromotion;
 import com._thefull.dasom_app_demo.domain.store.domain.Store;
@@ -12,9 +12,9 @@ public interface MenuPromotionRepository extends JpaRepository<MenuPromotion, Lo
 
     List<MenuPromotion> findByStore(Store store);
 
-    List<MenuPromotion> findByStoreAndCategory(Store store, Category category);
+    List<MenuPromotion> findByStoreAndCategoryOrderByCreateAtDesc(Store store, Category category);
 
-    List<MenuPromotion> findByStoreAndCategoryAndStatus(Store store, Category category, Status status);
+    List<MenuPromotion> findByStoreAndCategoryAndStatusOrderByCreateAtDesc(Store store, Category category, Status status);
 
 
 }

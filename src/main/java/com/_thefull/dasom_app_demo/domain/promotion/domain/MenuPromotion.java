@@ -1,8 +1,6 @@
 package com._thefull.dasom_app_demo.domain.promotion.domain;
 
 import com._thefull.dasom_app_demo.global.BaseEntity;
-import com._thefull.dasom_app_demo.global.Status;
-import com._thefull.dasom_app_demo.global.StatusConverter;
 import com._thefull.dasom_app_demo.domain.menu.domain.Category;
 import com._thefull.dasom_app_demo.domain.menu.domain.CategoryConverter;
 import com._thefull.dasom_app_demo.domain.menu.domain.Menu;
@@ -148,6 +146,9 @@ public class MenuPromotion extends BaseEntity {
     @JoinColumn(name = "MENU_ID")
     private Menu menu;
 
+    public void updateStatus(Status status){
+        this.status=status;
+    }
 
     public void updateMenuPromotion(MenuPromotionRequestDTO dto, Menu menu){
         Status _status = Status.determinStatusFromDate(dto.getPromoStartDate(), dto.getPromoEndDate());

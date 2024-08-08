@@ -41,9 +41,9 @@ public class Store extends BaseEntity {
     @Column(name = "CODE")
     private String code;
 
-    @CreatedDate
-    @Column(name = "REGISTER_DATE", updatable = false, columnDefinition = "TIMESTAMP")
-    private LocalDateTime registerDate;
+//    @CreatedDate
+//    @Column(name = "REGISTER_DATE", updatable = false, columnDefinition = "TIMESTAMP")
+//    private LocalDateTime registerDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
