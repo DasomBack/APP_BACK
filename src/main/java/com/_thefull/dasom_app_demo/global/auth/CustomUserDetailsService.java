@@ -31,6 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByPhoneNum(phoneNum)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_USER, "사용자를 찾을 수 없습니다. 다시 회원가입해주십시오."));
 
+
         Store store = storeRepository.findByCode(storeCode)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다."));
 
