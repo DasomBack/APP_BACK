@@ -67,5 +67,8 @@ public class Menu {
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
     private List<MenuPromotion> menuPromotionList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
+    private List<TempMenuIngred> ingredList= new ArrayList<>();
+
 
 }

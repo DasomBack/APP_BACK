@@ -1,6 +1,7 @@
 package com._thefull.dasom_app_demo.domain.promotion.service;
 
 import com._thefull.dasom_app_demo.domain.promotion.domain.Status;
+import com._thefull.dasom_app_demo.domain.promotion.domain.dto.*;
 import com._thefull.dasom_app_demo.global.auth.LoginUser;
 import com._thefull.dasom_app_demo.global.exception.AppException;
 import com._thefull.dasom_app_demo.global.exception.ErrorCode;
@@ -8,10 +9,6 @@ import com._thefull.dasom_app_demo.domain.menu.domain.Category;
 import com._thefull.dasom_app_demo.domain.menu.domain.Menu;
 import com._thefull.dasom_app_demo.domain.menu.repository.MenuRepository;
 import com._thefull.dasom_app_demo.domain.promotion.domain.MenuPromotion;
-import com._thefull.dasom_app_demo.domain.promotion.domain.dto.MenuPromotionRequestDTO;
-import com._thefull.dasom_app_demo.domain.promotion.domain.dto.MenuPromotionResponseDTO;
-import com._thefull.dasom_app_demo.domain.promotion.domain.dto.MenuPromotionListResponseDTO;
-import com._thefull.dasom_app_demo.domain.promotion.domain.dto.SimpleMenuPromoResponseDTO;
 import com._thefull.dasom_app_demo.domain.promotion.repository.MenuPromotionRepository;
 import com._thefull.dasom_app_demo.domain.store.domain.Store;
 import jakarta.transaction.Transactional;
@@ -75,7 +72,7 @@ public class MenuPromotionService {
     }
 
 
-    public MenuPromotionResponseDTO updateMenuPromotion(LoginUser user, Long id,MenuPromotionRequestDTO dto) {
+    public MenuPromotionResponseDTO updateMenuPromotion(LoginUser user, Long id, UpdateMenuPromotionRequestDTO dto) {
         MenuPromotion menuPromotion = menuPromotionRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "제품 홍보를 찾을 수 없습니다"));
         Menu menu = menuRepository.findById(dto.getMenuId())
@@ -83,7 +80,6 @@ public class MenuPromotionService {
 
         if(isValidUserForMenuPromotion(menuPromotion,user)){
             menuPromotion.updateMenuPromotion(dto,menu);
-
             MenuPromotion saved = menuPromotionRepository.save(menuPromotion);
             return MenuPromotionResponseDTO.from(saved);
 
@@ -117,10 +113,14 @@ public class MenuPromotionService {
 
     }
 
-    public MenuPromotionResponseDTO findById(Long id) {
+    public MenuPromotionResponseDTO findById(LoginUser user, Long id) {
         MenuPromotion menuPromotion = menuPromotionRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "ID="+id+" 인 제품 홍보를 찾을 수 없습니다"));
-        return MenuPromotionResponseDTO.from(menuPromotion);
+
+        if (isValidUserForMenuPromotion(menuPromotion, user))
+            return MenuPromotionResponseDTO.from(menuPromotion);
+        else throw new AppException(ErrorCode.UNAUTHORIZED_USER,"ID="+id+" 인 제품 홍보에 대한 조회 권한이 없습니다");
+
     }
 
     private boolean isValidUserForMenuPromotion(MenuPromotion promotion, LoginUser user){
