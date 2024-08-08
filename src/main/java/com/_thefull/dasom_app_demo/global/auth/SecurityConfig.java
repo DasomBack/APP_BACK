@@ -1,5 +1,6 @@
 package com._thefull.dasom_app_demo.global.auth;
 
+import com._thefull.dasom_app_demo.domain.store.repository.StoreRepository;
 import com._thefull.dasom_app_demo.domain.user.repository.UserRepository;
 import com._thefull.dasom_app_demo.global.utils.JWTUtils;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtils jwtUtils;
     private final UserRepository userRepository;
+    private final StoreRepository storeRepository;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -46,7 +48,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/register","/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(new JWTFilter(jwtUtils,userRepository), LoginFilter.class)
+                .addFilterBefore(new JWTFilter(jwtUtils,userRepository,storeRepository), LoginFilter.class)
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),new CustomAuthenticationFailureHandler(), jwtUtils), UsernamePasswordAuthenticationFilter.class
                 )
                 .build();

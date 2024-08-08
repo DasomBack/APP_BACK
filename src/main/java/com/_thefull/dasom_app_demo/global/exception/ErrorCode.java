@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 @Getter @AllArgsConstructor
 public enum ErrorCode {
     INVALID_STATE(HttpStatus.NOT_FOUND),
+    UNAUTHORIZED_USER(HttpStatus.UNAUTHORIZED),
+    UNMATCHED_TIME_STATUS(HttpStatus.CONFLICT),
     NOT_FOUND_USER(HttpStatus.NOT_FOUND),
     NOT_FOUND_PASSWORD(HttpStatus.NOT_FOUND),
     NOT_FOUND_ROBOT(HttpStatus.NOT_FOUND),

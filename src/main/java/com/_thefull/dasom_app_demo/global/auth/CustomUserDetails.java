@@ -1,5 +1,6 @@
 package com._thefull.dasom_app_demo.global.auth;
 
+import com._thefull.dasom_app_demo.domain.store.domain.Store;
 import com._thefull.dasom_app_demo.domain.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
-    private User user;
-    private String storeCode;
+    private LoginUser user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -39,6 +39,12 @@ public class CustomUserDetails implements UserDetails {
     public String getEmail(){
         return user.getEmail();
     }
+
+    public Store getStore(){
+        return user.getStore();
+    }
+
+    public String getStoreCode() { return user.getStore().getCode(); }
 
     public String getProfileImageUrl(){
         return user.getProfileImageUrl();

@@ -1,6 +1,7 @@
 package com._thefull.dasom_app_demo.global.utils;
 
 
+import com._thefull.dasom_app_demo.domain.store.domain.Store;
 import com._thefull.dasom_app_demo.domain.store.repository.StoreRepository;
 import com._thefull.dasom_app_demo.global.auth.CustomUserDetails;
 import io.jsonwebtoken.Claims;
@@ -59,6 +60,13 @@ public class JWTUtils {
                 .parseClaimsJws(token)
                 .getBody()
                 .get("profileImageUrl",String.class);
+    }
+
+    public Store getStore(String token){
+        return Jwts.parserBuilder().setSigningKey(key).build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("store",Store.class);
     }
 
     public String createNewToken(CustomUserDetails dto, Long expiredMs){
