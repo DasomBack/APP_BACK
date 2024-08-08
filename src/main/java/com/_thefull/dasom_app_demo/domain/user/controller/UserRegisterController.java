@@ -5,7 +5,6 @@ import com._thefull.dasom_app_demo.domain.user.domain.dto.UserRegisterRequestDto
 import com._thefull.dasom_app_demo.domain.user.domain.dto.UserRegisterResponseDTO;
 import com._thefull.dasom_app_demo.domain.user.service.UserRegisterService;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
