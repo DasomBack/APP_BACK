@@ -1,5 +1,6 @@
 package com._thefull.dasom_app_demo.domain.promotion.controller;
 
+import com._thefull.dasom_app_demo.domain.promotion.domain.dto.UpdateMenuPromotionRequestDTO;
 import com._thefull.dasom_app_demo.global.auth.AuthUser;
 import com._thefull.dasom_app_demo.global.auth.LoginUser;
 import com._thefull.dasom_app_demo.domain.promotion.domain.dto.MenuPromotionRequestDTO;
@@ -31,8 +32,9 @@ public class MenuPromotionsController {
     }
 
     @GetMapping
-    public ResponseEntity<MenuPromotionResponseDTO> findMenuPromotion(@RequestParam(name = "id")Long id){
-        MenuPromotionResponseDTO response = menuPromotionService.findById(id);
+    public ResponseEntity<MenuPromotionResponseDTO> findMenuPromotion(@AuthUser LoginUser user,
+                                                                      @RequestParam(name = "id")Long id){
+        MenuPromotionResponseDTO response = menuPromotionService.findById(user,id);
 
         return ResponseEntity.ok().body(response);
 
@@ -76,7 +78,7 @@ public class MenuPromotionsController {
     @PutMapping
     public ResponseEntity<MenuPromotionResponseDTO> updateMenuPromotion(@AuthUser LoginUser user,
                                                                         @RequestParam(name = "id")Long id,
-                                                                        @RequestBody final MenuPromotionRequestDTO requestDTO){
+                                                                        @RequestBody final UpdateMenuPromotionRequestDTO requestDTO){
         MenuPromotionResponseDTO responseDTO = menuPromotionService.updateMenuPromotion(user,id,requestDTO);
 
         return ResponseEntity.ok().body(responseDTO);
