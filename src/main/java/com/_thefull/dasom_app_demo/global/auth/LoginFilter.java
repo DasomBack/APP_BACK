@@ -73,8 +73,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
 
-        System.out.println("LoginFilter.successfulAuthentication");
-
         String newToken = jwtUtils.createNewToken(principal, 1000 * 60 * 60 * 2l);
         response.setStatus(HttpServletResponse.SC_OK);
         response.addHeader("Authorization","Bearer "+newToken);

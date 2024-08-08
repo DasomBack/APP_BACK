@@ -24,8 +24,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String principalStr) throws UsernameNotFoundException {
-        System.out.println("CustomUserDetailsService.loadUserByUsername");
-        System.out.println(principalStr);
 
         String phoneNum = principalStr.split("&")[0];
         String storeCode = principalStr.split("&")[1];
@@ -36,8 +34,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         Store store = storeRepository.findByCode(storeCode)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다."));
 
-        if (user!=null && store.getUser().equals(user)){
-           return new CustomUserDetails(user,storeCode);
+        LoginUser loginUser = LoginUser.from(user, store);
+        if (user!=null && store.getUser().getUserId()==user.getUserId()){
+            return new CustomUserDetails(loginUser);
         }
         throw new UsernameNotFoundException("사용자를 찾을 수 없습니다. 다시 회원가입해주십시오.");
     }

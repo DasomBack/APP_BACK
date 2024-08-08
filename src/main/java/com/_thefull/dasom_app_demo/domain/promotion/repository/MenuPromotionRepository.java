@@ -12,9 +12,9 @@ public interface MenuPromotionRepository extends JpaRepository<MenuPromotion, Lo
 
     List<MenuPromotion> findByStore(Store store);
 
-    List<MenuPromotion> findByStoreAndCategory(Store store, Category category);
+    List<MenuPromotion> findByStoreAndCategoryOrderByCreateAtDesc(Store store, Category category);
 
-    List<MenuPromotion> findByStoreAndCategoryAndStatus(Store store, Category category, Status status);
+    List<MenuPromotion> findByStoreAndCategoryAndStatusOrderByCreateAtDesc(Store store, Category category, Status status);
 
 
 }

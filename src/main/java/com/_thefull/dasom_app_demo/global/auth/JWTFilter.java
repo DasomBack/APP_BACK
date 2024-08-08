@@ -1,5 +1,7 @@
 package com._thefull.dasom_app_demo.global.auth;
 
+import com._thefull.dasom_app_demo.domain.store.domain.Store;
+import com._thefull.dasom_app_demo.domain.store.repository.StoreRepository;
 import com._thefull.dasom_app_demo.domain.user.domain.User;
 import com._thefull.dasom_app_demo.domain.user.repository.UserRepository;
 import com._thefull.dasom_app_demo.global.exception.AppException;
@@ -25,6 +27,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
     private JWTUtils jwtUtils;
     private UserRepository userRepository;
+    private StoreRepository storeRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -48,13 +51,18 @@ public class JWTFilter extends OncePerRequestFilter {
             User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_USER, "사용자를 찾을 수 없습니다"));
 
-            CustomUserDetails principal = new CustomUserDetails(user, storeCode);
+            Store store = storeRepository.findByCode(storeCode)
+                    .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다."));
+
+            LoginUser loginUser = LoginUser.from(user, store);
+
+            CustomUserDetails principal = new CustomUserDetails(loginUser);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         }catch (JwtException e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }finally {
             filterChain.doFilter(request,response);
         }
