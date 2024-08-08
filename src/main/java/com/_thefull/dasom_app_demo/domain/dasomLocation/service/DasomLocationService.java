@@ -4,6 +4,7 @@ import com._thefull.dasom_app_demo.domain.dasomLocation.domain.DasomLocation;
 import com._thefull.dasom_app_demo.domain.dasomLocation.domain.dto.DasomLocationRequestDTO;
 import com._thefull.dasom_app_demo.domain.dasomLocation.domain.dto.DasomLocationResponseDTO;
 import com._thefull.dasom_app_demo.domain.dasomLocation.repository.DasomLocationRepository;
+import com._thefull.dasom_app_demo.global.auth.LoginUser;
 import com._thefull.dasom_app_demo.global.exception.AppException;
 import com._thefull.dasom_app_demo.global.exception.ErrorCode;
 import com._thefull.dasom_app_demo.domain.robot.domain.Robot;
@@ -57,52 +58,59 @@ public class DasomLocationService {
 
     }
 
-    public DasomLocationResponseDTO updateDasomLocation(Store store, Long locationId, DasomLocationRequestDTO requestDTO){
+    public DasomLocationResponseDTO updateDasomLocation(LoginUser user,Store store, Long locationId, DasomLocationRequestDTO requestDTO){
         Robot robot = robotRepository.findByStore(store)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_ROBOT, "로봇을 찾을 수 없습니다"));
         DasomLocation dasomLocation = dasomLocationRepository.findById(locationId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_DASOM_LOCATION, "다솜 위치 설정 값을 찾을 수 없습니다"));
 
         /* 유효하지 않은 사용자 검출 */
-        if (!dasomLocation.getRobot().equals(robot))
-            throw new AppException(ErrorCode.REQUEST_FORBIDDEN,"수정 권한이 없습니다");
+        if (isValidUserForLocation(dasomLocation,user)){
+            dasomLocation.update(requestDTO);
+            DasomLocation updated = dasomLocationRepository.save(dasomLocation);
 
-        dasomLocation.update(requestDTO);
-        DasomLocation updated = dasomLocationRepository.save(dasomLocation);
-
-        return DasomLocationResponseDTO.of(updated);
-
+            return DasomLocationResponseDTO.of(updated);
+        }
+        else throw new AppException(ErrorCode.REQUEST_FORBIDDEN,"ID="+locationId+" 인 위치 설정에 대해 수정 권한이 없습니다");
     }
 
-    public void deleteDasomLocation(Store store, Long locationId) {
+    public void deleteDasomLocation(LoginUser user, Store store, Long locationId) {
         Robot robot = robotRepository.findByStore(store)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_ROBOT, "로봇을 찾을 수 없습니다"));
         DasomLocation dasomLocation = dasomLocationRepository.findById(locationId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_DASOM_LOCATION, "다솜 위치 설정 값을 찾을 수 없습니다"));
 
         /* 유효하지 않은 사용자 검출 */
-        if (!dasomLocation.getRobot().equals(robot))
-            throw new AppException(ErrorCode.REQUEST_FORBIDDEN,"삭제 권한이 없습니다");
-
-        dasomLocationRepository.deleteById(locationId);
+        if (isValidUserForLocation(dasomLocation,user ))
+            dasomLocationRepository.deleteById(locationId);
+        else throw new AppException(ErrorCode.REQUEST_FORBIDDEN,"ID="+locationId+" 인 위치 설정에 대해 삭제 권한이 없습니다");
 
     }
 
-    public DasomLocationResponseDTO changeUse(Store store, Long locationId, Boolean use) {
+    public DasomLocationResponseDTO changeUse(LoginUser user, Store store, Long locationId, Boolean use) {
         Robot robot = robotRepository.findByStore(store)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_ROBOT, "로봇을 찾을 수 없습니다"));
         DasomLocation dasomLocation = dasomLocationRepository.findById(locationId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_DASOM_LOCATION, "다솜 위치 설정 값을 찾을 수 없습니다"));
 
         /* 유효하지 않은 사용자 검출 */
-        if (!dasomLocation.getRobot().equals(robot))
-            throw new AppException(ErrorCode.REQUEST_FORBIDDEN,"사용 여부 수정 권한이 없습니다");
-        if (use==dasomLocation.getUse())
-            throw new AppException(ErrorCode.ALREADY_SET,"이미 설정된 값입니다");
+        if(isValidUserForLocation(dasomLocation,user)){
+            if (use==dasomLocation.getUse())
+                throw new AppException(ErrorCode.ALREADY_SET,"이미 설정된 값입니다");
 
-        dasomLocation.changeUse(use);
-        DasomLocation saved = dasomLocationRepository.save(dasomLocation);
+            dasomLocation.changeUse(use);
+            DasomLocation saved = dasomLocationRepository.save(dasomLocation);
 
-        return DasomLocationResponseDTO.of(saved);
+            return DasomLocationResponseDTO.of(saved);
+        }else throw new AppException(ErrorCode.REQUEST_FORBIDDEN,"ID="+locationId+" 인 위치 설정에 대해 수정 권한이 없습니다");
+
+
     }
+
+    private boolean isValidUserForLocation(DasomLocation location, LoginUser user){
+        return location.getRobot().getStore().getId() == user.getStore().getId();
+
+    }
+
+
 }
