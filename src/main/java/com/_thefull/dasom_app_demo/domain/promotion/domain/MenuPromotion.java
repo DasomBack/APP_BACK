@@ -146,6 +146,9 @@ public class MenuPromotion extends BaseEntity {
     @JoinColumn(name = "MENU_ID")
     private Menu menu;
 
+    public void updateStatus(Status status){
+        this.status=status;
+    }
 
     public void updateMenuPromotion(MenuPromotionRequestDTO dto, Menu menu){
         Status _status = Status.determinStatusFromDate(dto.getPromoStartDate(), dto.getPromoEndDate());
