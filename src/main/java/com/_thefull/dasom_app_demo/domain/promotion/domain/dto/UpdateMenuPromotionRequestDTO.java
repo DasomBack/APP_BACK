@@ -28,7 +28,7 @@ public class UpdateMenuPromotionRequestDTO {
     private String discType;
 
     // 할인값 혹은 할인율 : %인지는 백에서 확인 , 할인 없을 경우 -1
-    private int discVal;
+    private Integer discVal;
 
     // 행사 기간 타입
     // 상시 : ALWAYS
@@ -42,26 +42,26 @@ public class UpdateMenuPromotionRequestDTO {
 
     // 행사 시간
     // 영업시간과 동일 여부
-    private boolean boolEqlOprTime;
+    private Boolean boolEqlOprTime;
     private LocalTime promoStartTime;
     private LocalTime promoEndTime;
 
     // 멘트 발화 시간
     // 행사시간과 동일 여부
-    private boolean boolEqlPromoTime;
+    private Boolean boolEqlPromoTime;
     private LocalTime mentStartTime;
     private LocalTime mentEndTime;
 
     // 발화 횟수
-    private int mentInterval;
+    private Integer mentInterval;
 
     // 할인 조건 추가 여부
-    private boolean boolAddDiscCond;
+    private Boolean boolAddDiscCond;
     // 할인 추가 조건
     private String addDiscCond;
 
     // 제품 소개 추가 여부
-    private boolean boolAddMenuDesc;
+    private Boolean boolAddMenuDesc;
     // 제품 추가 소개
     private String addMenuDesc;
 

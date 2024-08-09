@@ -34,6 +34,7 @@ public class MenuPromotionService {
 
         Status status = Status.determinStatusFromDate(dto.getPromoStartDate(), dto.getPromoEndDate());
 
+
         MenuPromotion newPromotion = dto.from(menu, status, store);
 
         MenuPromotion saved = menuPromotionRepository.save(newPromotion);
@@ -90,7 +91,11 @@ public class MenuPromotionService {
     public MenuPromotionResponseDTO updateStatusOfMenuPromotion(LoginUser user, Long promotionId, String statusName) {
         MenuPromotion promotion = menuPromotionRepository.findById(promotionId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "제품 홍보를 찾을 수 없습니다"));
+
+        System.out.println(statusName);
         Status status = Status.fromStatusName(statusName);
+
+        System.out.println(status);
         if (isValidUserForMenuPromotion(promotion,user)){
             if (isValidUpdateStatus(promotion,status)){
                 promotion.updateStatus(status);
@@ -114,8 +119,9 @@ public class MenuPromotionService {
     }
 
     public MenuPromotionResponseDTO findById(LoginUser user, Long id) {
+
         MenuPromotion menuPromotion = menuPromotionRepository.findById(id)
-                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "ID="+id+" 인 제품 홍보를 찾을 수 없습니다"));
+                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "ID=1 인 제품 홍보를 찾을 수 없습니다"));
 
         if (isValidUserForMenuPromotion(menuPromotion, user))
             return MenuPromotionResponseDTO.from(menuPromotion);
