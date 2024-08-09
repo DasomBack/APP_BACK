@@ -1,7 +1,10 @@
-package com._thefull.dasom_app_demo.global.auth;
+package com._thefull.dasom_app_demo.global.config;
 
 import com._thefull.dasom_app_demo.domain.store.repository.StoreRepository;
 import com._thefull.dasom_app_demo.domain.user.repository.UserRepository;
+import com._thefull.dasom_app_demo.global.auth.CustomAuthenticationFailureHandler;
+import com._thefull.dasom_app_demo.global.auth.JWTFilter;
+import com._thefull.dasom_app_demo.global.auth.LoginFilter;
 import com._thefull.dasom_app_demo.global.utils.JWTUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -45,7 +48,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/user/register","/login").permitAll()
+                        .requestMatchers("/user/register","/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JWTFilter(jwtUtils,userRepository,storeRepository), LoginFilter.class)
