@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,6 @@ public class DasomLocationService {
         Robot robot = robotRepository.findByStore(store)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_ROBOT, "로봇을 찾을 수 없습니다"));
         List<DasomLocation> locationList = dasomLocationRepository.findAllByRobot(robot);
-
         return DasomLocationResponseDTO.toDTOList(locationList);
 
     }

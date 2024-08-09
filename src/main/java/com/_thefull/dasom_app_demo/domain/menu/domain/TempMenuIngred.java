@@ -17,7 +17,9 @@ public class TempMenuIngred {
     @Column(length = 10)
     private String unit;
 
-    private int price;
+    private Integer quant;
+
+    private Integer price;
 
     private String name;
 
