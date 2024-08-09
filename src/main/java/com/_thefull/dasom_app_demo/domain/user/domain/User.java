@@ -1,6 +1,7 @@
 package com._thefull.dasom_app_demo.domain.user.domain;
 
 
+import com._thefull.dasom_app_demo.domain.user.domain.dto.UpdateUserRequestDTO;
 import com._thefull.dasom_app_demo.global.BaseEntity;
 import com._thefull.dasom_app_demo.domain.store.domain.Store;
 import jakarta.persistence.*;
@@ -48,5 +49,17 @@ public class User extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Store> storeList = new ArrayList<>();
+
+    public void changePassword(String endcodedPW){
+        this.password=endcodedPW;
+    }
+
+    public void update(UpdateUserRequestDTO dto){
+        this.name=dto.getName();
+        this.email=dto.getEmail();
+        this.phoneNum=dto.getPhoneNum();
+
+
+    }
 
 }
