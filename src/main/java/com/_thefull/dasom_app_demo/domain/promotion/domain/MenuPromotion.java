@@ -51,7 +51,7 @@ public class MenuPromotion extends BaseEntity {
 //    @Column(name = "DISC_PRICE")
 //    private int discPrice;
 
-    @Convert(converter = DateTypeConverter.class)
+    @Convert(converter = DiscTypeConverter.class)
     @Column(name = "DISC_TYPE", columnDefinition = "TINYINT")
     private DiscType discType;
 
@@ -60,12 +60,7 @@ public class MenuPromotion extends BaseEntity {
     @Column(name = "DISC_VAL")
     private Integer discVal=0;
 
-//    // 할인율(%)
-//    @Builder.Default
-//    @Column(name = "DISC_RATE")
-//    private Integer discRate=0;
-
-    @Convert(converter = DiscTypeConverter.class)
+    @Convert(converter = DateTypeConverter.class)
     @Column(name = "DATE_TYPE", columnDefinition = "TINYINT")
     private DateType dateType;
 
@@ -103,7 +98,7 @@ public class MenuPromotion extends BaseEntity {
 
     // 발화 빈도수
     @Column(name = "MENT_INTERVAL")
-    private int mentInterval;
+    private Integer mentInterval;
 
     // 프로모션 소개 추가 여부
     @Column(name = "IS_ADD_DESC")
@@ -112,11 +107,6 @@ public class MenuPromotion extends BaseEntity {
     // 프로모션 추가 소개
     @Column(name = "ADD_DESC", columnDefinition = "TINYTEXT")
     private String addMenuDesc;
-
-//    //할인 여부 : 할인하지 않은 상품도 홍보할 수 있습니다.
-//    @Column(name = "IS_DISC")
-//    private Boolean boolIsDisc;
-
 
     // 할인 조건 추가 여부
     @Column(name = "IS_ADD_COND")
@@ -129,13 +119,6 @@ public class MenuPromotion extends BaseEntity {
     // 다솜 멘트
     @Column(name = "MENT", columnDefinition = "TEXT")
     private String ment;
-
-//    @Column(name = "MENT_COUNT", columnDefinition = "TINYINT")
-//    private int mentCount;
-
-//    // 상시 여부
-//    @Column(name = "IS_ALWAYS")
-//    private Boolean boolIsAlways;
 
     // 매장
     @ManyToOne(fetch = FetchType.LAZY)
@@ -157,21 +140,21 @@ public class MenuPromotion extends BaseEntity {
 
         this.category=menu.getCategory();
         this.status=status;
-        this.discType=DiscType.fromName(dto.getDateType());
+        this.discType=DiscType.fromName(dto.getDiscType());
         this.discVal=dto.getDiscVal();
         this.dateType= DateType.fromName(dto.getDateType());
         this.promoStartDate=dto.getPromoStartDate();
         this.promoEndDate=dto.getPromoEndDate();
-        this.boolEqlOprTime=dto.isBoolEqlOprTime();
+        this.boolEqlOprTime=dto.getBoolEqlOprTime();
         this.promoStartTime = dto.getPromoStartTime();
         this.promoEndTime=dto.getPromoEndTime();
-        this.boolEqlPromoTime=dto.isBoolEqlPromoTime();
+        this.boolEqlPromoTime=dto.getBoolEqlPromoTime();
         this.mentStartTime=dto.getMentStartTime();
         this.mentEndTime=dto.getMentEndTime();
         this.mentInterval=dto.getMentInterval();
-        this.boolAddDiscCond=dto.isBoolAddDiscCond();
+        this.boolAddDiscCond=dto.getBoolAddDiscCond();
         this.addDiscCond=dto.getAddDiscCond();
-        this.boolAddMenuDesc=dto.isBoolAddMenuDesc();
+        this.boolAddMenuDesc=dto.getBoolAddMenuDesc();
         this.addMenuDesc=dto.getAddMenuDesc();
         this.ment= dto.getMent();
         this.menu=menu;
