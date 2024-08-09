@@ -35,11 +35,14 @@ public class UserRegisterService {
         Store store = storeRepository.findByCode(dto.getStoreCode())
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "코드에 해당하는 매장이 존재하지 않습니다"));
 
+
         User newUser = dto.toEntity(encodedPW);
         User savedUser = userRepository.save(newUser);
 
-        return UserRegisterResponseDTO.of(savedUser, store);
+        store.changeUser(savedUser);
+        storeRepository.save(store);
 
+        return UserRegisterResponseDTO.of(savedUser, store);
 
     }
 
