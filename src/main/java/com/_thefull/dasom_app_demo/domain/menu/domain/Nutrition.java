@@ -21,22 +21,22 @@ public class Nutrition {
     private Long id;
 
     // 칼로리
-    private int cal;
+    private Integer cal;
 
     // 당류
-    private int sugars;
+    private Integer sugars;
 
     // 단백질
-    private int protein;
+    private Integer protein;
 
     // 나트륨
-    private int sodium;
+    private Integer sodium;
 
     // 포화 지방
-    private int fat;
+    private Integer fat;
 
     // 카페인
-    private int caffeine;
+    private Integer caffeine;
 
     // 영양 성분표 이미지 url
     @Column(name = "img_url")

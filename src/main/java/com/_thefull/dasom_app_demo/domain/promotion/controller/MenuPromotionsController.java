@@ -36,6 +36,7 @@ public class MenuPromotionsController {
                                                                       @RequestParam(name = "id")Long id){
         MenuPromotionResponseDTO response = menuPromotionService.findById(user,id);
 
+        System.out.println("MenuPromotionsController.findMenuPromotion");
         return ResponseEntity.ok().body(response);
 
     }
