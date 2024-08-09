@@ -9,10 +9,10 @@ import jakarta.persistence.Converter;
 @Converter(autoApply = true)
 public class DateTypeConverter implements AttributeConverter<DateType, Integer> {
     @Override
-    public Integer convertToDatabaseColumn(DateType discType) {
-        if(discType==null)
+    public Integer convertToDatabaseColumn(DateType dateType) {
+        if(dateType==null)
             throw new AppException(ErrorCode.NO_DISC_TYPE,"존재하지 않는 할인 종류입니다");
-        return discType.getIntVal();
+        return dateType.getIntVal();
     }
 
     @Override

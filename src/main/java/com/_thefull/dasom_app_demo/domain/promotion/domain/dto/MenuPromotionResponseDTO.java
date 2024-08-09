@@ -1,6 +1,7 @@
 package com._thefull.dasom_app_demo.domain.promotion.domain.dto;
 
 import com._thefull.dasom_app_demo.domain.menu.domain.Menu;
+import com._thefull.dasom_app_demo.domain.menu.domain.dto.MenuResponseDTO;
 import com._thefull.dasom_app_demo.domain.promotion.domain.DiscType;
 import com._thefull.dasom_app_demo.domain.promotion.domain.MenuPromotion;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import java.time.LocalTime;
 public class MenuPromotionResponseDTO {
     private Long menuPromoId;
 
-    private Menu menu;
+    private MenuResponseDTO menu;
 
     private String status;
 
@@ -30,10 +31,10 @@ public class MenuPromotionResponseDTO {
     private String discType;
 
     // 할인값 or 할인율
-    private int discVal;
+    private Integer discVal;
 
     // 할인된 가격
-    private int discPrice;
+    private Integer discPrice;
 
     // 행사 기간 타입
     // 상시 : ALWAYS
@@ -44,23 +45,23 @@ public class MenuPromotionResponseDTO {
     private LocalDate promoStartDate;
     private LocalDate promoEndDate;
 
-    private boolean boolEqlOprTime;
+    private Boolean boolEqlOprTime;
     private LocalTime promoStartTime;
     private LocalTime promoEndTime;
 
-    private boolean boolEqlPromoTime;
+    private Boolean boolEqlPromoTime;
     private LocalTime mentStartTime;
     private LocalTime mentEndTime;
 
     private String mentInterval;
 
     // 할인 조건 추가 여부
-    private boolean boolAddDiscCond;
+    private Boolean boolAddDiscCond;
     // 할인 추가 조건
     private String addDiscCond;
 
     // 제품 소개 추가 여부
-    private boolean boolAddMenuDesc;
+    private Boolean boolAddMenuDesc;
     // 제품 추가 소개
     private String addMenuDesc;
 
@@ -83,13 +84,22 @@ public class MenuPromotionResponseDTO {
             discPrice=price;
         }
 
+        int _mentInterval;
+        String mentInterval;
         /* mentInterval string 생성 */
-        int _mentInterval = e.getMentInterval();
-        String mentInterval=_mentInterval+"분 간격";
+        if (e.getMentInterval()!=null){
+            _mentInterval = e.getMentInterval();
+            mentInterval=_mentInterval+"분 간격";
+        }
+        else {
+            mentInterval="없음";
+
+        }
+
 
         return MenuPromotionResponseDTO.builder()
                 .menuPromoId(e.getId())
-                .menu(e.getMenu())
+                .menu(MenuResponseDTO.of(e.getMenu()))
                 .status(e.getStatus().name())
                 .category(e.getCategory().name())
                 .discType(e.getDiscType().name())

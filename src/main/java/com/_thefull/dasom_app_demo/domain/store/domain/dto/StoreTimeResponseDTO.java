@@ -14,7 +14,7 @@ public class StoreTimeResponseDTO {
     private Long storeId;
 
     private String day;
-    private boolean boolIsOpr;
+    private Boolean boolIsOpr;
 
     private LocalTime openTime;
     private LocalTime closeTime;

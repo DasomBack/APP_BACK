@@ -21,8 +21,8 @@ public class SimpleMenuPromoResponseDTO {
 
     private String menuName;
 
-    private int menuPrice;
-    private int discPrice;
+    private Integer menuPrice;
+    private Integer discPrice;
 
     private LocalDate startDate;
     private LocalDate endDate;
