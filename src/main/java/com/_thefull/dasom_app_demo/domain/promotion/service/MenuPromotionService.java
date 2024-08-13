@@ -56,10 +56,20 @@ public class MenuPromotionService {
         Category category = Category.fromCategoryName(categoryName);
         Status status = Status.fromStatusName(statusName);
 
+        System.out.println(categoryName+ statusName);
+
         List<MenuPromotion> menuPromotionList;
 
-        if(statusName.equals("ALL")){
+        if(statusName.equals("ALL") && categoryName.equals("ALL")){
+            menuPromotionList = menuPromotionRepository.findByStoreOrderByCreateAtDesc(store);
+        }
+        else if(statusName.equals("ALL") && !categoryName.equals("ALL")){
             menuPromotionList = menuPromotionRepository.findByStoreAndCategoryOrderByCreateAtDesc(store,category);
+        }
+        else if(!statusName.equals("ALL") && categoryName.equals("ALL")){
+            System.out.println("MenuPromotionService.findMenuPromoListByCategoryAndStatus");
+            menuPromotionList= menuPromotionRepository.findByStoreAndStatusOrderByCreateAtDesc(store,status);
+            System.out.println("MenuPromotionService.findMenuPromoListByCategoryAndStatus");
         }
         else{
             menuPromotionList = menuPromotionRepository.findByStoreAndCategoryAndStatusOrderByCreateAtDesc(store, category, status);
