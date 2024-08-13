@@ -10,9 +10,11 @@ import java.util.List;
 
 public interface MenuPromotionRepository extends JpaRepository<MenuPromotion, Long> {
 
-    List<MenuPromotion> findByStore(Store store);
+    List<MenuPromotion> findByStoreOrderByCreateAtDesc(Store store);
 
     List<MenuPromotion> findByStoreAndCategoryOrderByCreateAtDesc(Store store, Category category);
+
+    List<MenuPromotion> findByStoreAndStatusOrderByCreateAtDesc(Store store, Status status);
 
     List<MenuPromotion> findByStoreAndCategoryAndStatusOrderByCreateAtDesc(Store store, Category category, Status status);
 
