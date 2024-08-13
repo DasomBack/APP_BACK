@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @Slf4j
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
@@ -31,6 +32,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         this.authenticationFailureHandler=authenticationFailureHandler;
 
         setFilterProcessesUrl("/login");
+
     }
 
     @Override
@@ -75,7 +77,20 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String newToken = jwtUtils.createNewToken(principal, 1000 * 60 * 60 * 2l);
         response.setStatus(HttpServletResponse.SC_OK);
+        response.addHeader("Content-Type","application/json; charset=UTF-8");
         response.addHeader("Authorization","Bearer "+newToken);
+
+        String responseBody = "{"
+                + "\"name\":\"" + principal.getUsername() + "\","
+                + "\"email\":\"" + principal.getEmail() + "\","
+                + "\"profileImageUrl\":\"" + principal.getProfileImageUrl() + "\","
+                + "\"phoneNum\":\"" + principal.getPhoneNum() + "\","
+                + "\"store\": {"
+                + "\"name\":\"" + principal.getStore().getName() + "\""
+                + "}"
+                + "}";
+
+        response.getWriter().write(responseBody);
 
     }
 
