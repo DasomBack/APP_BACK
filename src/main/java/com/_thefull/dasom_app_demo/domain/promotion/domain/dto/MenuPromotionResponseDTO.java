@@ -53,7 +53,7 @@ public class MenuPromotionResponseDTO {
     private LocalTime mentStartTime;
     private LocalTime mentEndTime;
 
-    private String mentInterval;
+    private Integer mentInterval;
 
     // 할인 조건 추가 여부
     private Boolean boolAddDiscCond;
@@ -84,17 +84,7 @@ public class MenuPromotionResponseDTO {
             discPrice=price;
         }
 
-        int _mentInterval;
-        String mentInterval;
-        /* mentInterval string 생성 */
-        if (e.getMentInterval()!=null){
-            _mentInterval = e.getMentInterval();
-            mentInterval=_mentInterval+"분 간격";
-        }
-        else {
-            mentInterval="없음";
 
-        }
 
 
         return MenuPromotionResponseDTO.builder()
@@ -114,7 +104,7 @@ public class MenuPromotionResponseDTO {
                 .boolEqlPromoTime(e.getBoolEqlPromoTime())
                 .mentStartTime(e.getMentStartTime())
                 .mentEndTime(e.getMentEndTime())
-                .mentInterval(mentInterval)
+                .mentInterval(e.getMentInterval())
                 .boolAddDiscCond(e.getBoolAddDiscCond())
                 .addDiscCond(e.getAddDiscCond())
                 .boolAddMenuDesc(e.getBoolAddMenuDesc())

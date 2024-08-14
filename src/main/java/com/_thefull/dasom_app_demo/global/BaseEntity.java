@@ -26,6 +26,4 @@ public abstract class BaseEntity {
     @LastModifiedDate
     private Timestamp modifiedAt;
 
-
-
 }
