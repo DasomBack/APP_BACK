@@ -13,7 +13,6 @@ public class testcontroller {
     @GetMapping("/test")
     public ResponseEntity<String> authenticationTest(@AuthUser LoginUser user){
         System.out.println("testcontroller.authenticationTest");
-        System.out.println(user.getEmail());
         System.out.println(user.getPhoneNum());
 
         return ResponseEntity.ok().body("로그인이 수행되었습니다");

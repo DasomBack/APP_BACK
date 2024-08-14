@@ -11,13 +11,15 @@ import lombok.Getter;
 public class TempIngredResponseDTO
 {
     private String name;
-    private int price;
+    private Integer price;
+    private Integer quant;
     private String unit;
 
     public static TempIngredResponseDTO of(TempMenuIngred e){
         return TempIngredResponseDTO.builder()
                 .name(e.getName())
                 .price(e.getPrice())
+                .quant(e.getQuant())
                 .unit(e.getUnit())
                 .build();
     }

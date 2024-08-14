@@ -16,8 +16,8 @@ public class MenuResponseDTO {
 
     private Long id;
     private String name;
-    private int price;
-    private int basePrice;
+    private Integer price;
+    private Integer basePrice;
     private String imgUrl;
     private String desc;
 
