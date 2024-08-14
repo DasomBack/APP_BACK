@@ -4,6 +4,7 @@ import com._thefull.dasom_app_demo.domain.menu.domain.Menu;
 import com._thefull.dasom_app_demo.domain.menu.domain.dto.MenuResponseDTO;
 import com._thefull.dasom_app_demo.domain.promotion.domain.DiscType;
 import com._thefull.dasom_app_demo.domain.promotion.domain.MenuPromotion;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 public class MenuPromotionResponseDTO {
-    private Long menuPromoId;
+    private Long id;
 
     private MenuResponseDTO menu;
 
@@ -38,30 +39,34 @@ public class MenuPromotionResponseDTO {
 
     // 행사 기간 타입
     // 상시 : ALWAYS
-    // 2주 : 2WEEK
-    // 1주 : 1WEEK
+    // 2주 : TWO_WEEK
+    // 1주 : ONE_WEEK
     // 그 외 : OTHER
     private String dateType;
-    private LocalDate promoStartDate;
-    private LocalDate promoEndDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    private Boolean boolEqlOprTime;
-    private LocalTime promoStartTime;
-    private LocalTime promoEndTime;
+    private Boolean isEqlOprTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    private LocalTime startTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+    private LocalTime endTime;
 
-    private Boolean boolEqlPromoTime;
+    private Boolean isEqlPromoTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime mentStartTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime mentEndTime;
 
     private Integer mentInterval;
 
     // 할인 조건 추가 여부
-    private Boolean boolAddDiscCond;
+    private Boolean isAddDiscCond;
     // 할인 추가 조건
     private String addDiscCond;
 
     // 제품 소개 추가 여부
-    private Boolean boolAddMenuDesc;
+    private Boolean isAddMenuDesc;
     // 제품 추가 소개
     private String addMenuDesc;
 
@@ -88,7 +93,7 @@ public class MenuPromotionResponseDTO {
 
 
         return MenuPromotionResponseDTO.builder()
-                .menuPromoId(e.getId())
+                .id(e.getId())
                 .menu(MenuResponseDTO.of(e.getMenu()))
                 .status(e.getStatus().name())
                 .category(e.getCategory().name())
@@ -96,18 +101,18 @@ public class MenuPromotionResponseDTO {
                 .discVal(e.getDiscVal())
                 .discPrice(discPrice)
                 .dateType(e.getDateType().name())
-                .promoStartDate(e.getPromoStartDate())
-                .promoEndDate(e.getPromoEndDate())
-                .boolEqlOprTime(e.getBoolEqlOprTime())
-                .promoStartTime(e.getPromoStartTime())
-                .promoEndDate(e.getPromoEndDate())
-                .boolEqlPromoTime(e.getBoolEqlPromoTime())
+                .startDate(e.getStartDate())
+                .endDate(e.getEndDate())
+                .isEqlOprTime(e.getIsEqlOprTime())
+                .startTime(e.getStartTime())
+                .endTime(e.getEndTime())
+                .isEqlPromoTime(e.getIsEqlPromoTime())
                 .mentStartTime(e.getMentStartTime())
                 .mentEndTime(e.getMentEndTime())
                 .mentInterval(e.getMentInterval())
-                .boolAddDiscCond(e.getBoolAddDiscCond())
+                .isAddDiscCond(e.getIsAddDiscCond())
                 .addDiscCond(e.getAddDiscCond())
-                .boolAddMenuDesc(e.getBoolAddMenuDesc())
+                .isAddMenuDesc(e.getIsAddMenuDesc())
                 .addMenuDesc(e.getAddMenuDesc())
                 .ment(e.getMent())
                 .createdAt(e.getCreateAt())

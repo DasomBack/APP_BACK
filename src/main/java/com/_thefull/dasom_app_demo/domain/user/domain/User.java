@@ -35,11 +35,11 @@ public class User extends BaseEntity {
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "EMAIL")
-    private String email;
+//    @Column(name = "EMAIL")
+//    private String email;
 
     @Column(name = "PROFILE_IMG_URL")
-    private String profileImageUrl;
+    private String imgUrl;
 
     @CreatedDate
     @Column(columnDefinition = "TIMESTAMP", name = "REGISTER_DATE", updatable = false)
@@ -56,7 +56,6 @@ public class User extends BaseEntity {
 
     public void update(UpdateUserRequestDTO dto){
         this.name=dto.getName();
-        this.email=dto.getEmail();
         this.phoneNum=dto.getPhoneNum();
 
 

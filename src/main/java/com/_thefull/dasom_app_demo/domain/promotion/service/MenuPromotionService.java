@@ -32,7 +32,7 @@ public class MenuPromotionService {
         Menu menu = menuRepository.findById(dto.getMenuId())
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
 
-        Status status = Status.determinStatusFromDate(dto.getPromoStartDate(), dto.getPromoEndDate());
+        Status status = Status.determinStatusFromDate(dto.getStartDate(), dto.getEndDate());
 
 
         MenuPromotion newPromotion = dto.from(menu, status, store);
@@ -145,10 +145,10 @@ public class MenuPromotionService {
 
     private boolean isValidUpdateStatus(MenuPromotion promotion, Status status){
         /* 시작 날짜가 현재 날짜보다 뒤에 있는데 진행으로 바꾸려는 경우 */
-        boolean result= !promotion.getPromoStartDate().isAfter(LocalDate.now()) || status != Status.IN_PROGRESS;
+        boolean result= !promotion.getStartDate().isAfter(LocalDate.now()) || status != Status.IN_PROGRESS;
 
         /* 종료 날짜가 지났는데 진행 혹은 예정으로 바꾸려는 경우 */
-        if (promotion.getPromoEndDate().isBefore(LocalDate.now())
+        if (promotion.getEndDate().isBefore(LocalDate.now())
                 && (status==Status.SCHEDULED || status==Status.IN_PROGRESS))
             result=false;
 

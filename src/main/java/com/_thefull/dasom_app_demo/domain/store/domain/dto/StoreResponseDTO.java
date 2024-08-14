@@ -12,7 +12,7 @@ public class StoreResponseDTO {
     private Long id;
     private String name;
     private String companyName;
-    private String instagramLink;
+    private String instagramId;
     private String phoneNum;
     private String code;
 
@@ -21,7 +21,7 @@ public class StoreResponseDTO {
                 .id(e.getId())
                 .name(e.getName())
                 .companyName(e.getCompanyName())
-                .instagramLink(e.getInstagramLink())
+                .instagramId(e.getInstagramLink())
                 .phoneNum(e.getPhoneNum())
                 .code(e.getCode())
                 .build();
