@@ -15,6 +15,7 @@ public class UserRegisterResponseDTO {
     private Long id;
     private String name;
     private StoreResponseDTO store;
+    private String imgUrl;
     private String phoneNum;
 
     public static UserRegisterResponseDTO of(User e, Store store){
@@ -22,6 +23,7 @@ public class UserRegisterResponseDTO {
                 .id(e.getUserId())
                 .name(e.getName())
                 .store(StoreResponseDTO.of(store))
+                .imgUrl(e.getImgUrl())
                 .phoneNum(e.getPhoneNum())
                 .build();
     }
