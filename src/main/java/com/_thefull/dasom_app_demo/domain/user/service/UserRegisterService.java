@@ -8,12 +8,15 @@ import com._thefull.dasom_app_demo.domain.user.domain.dto.UpdateUserRequestDTO;
 import com._thefull.dasom_app_demo.domain.user.domain.dto.UserRegisterRequestDto;
 import com._thefull.dasom_app_demo.domain.user.domain.dto.UserRegisterResponseDTO;
 import com._thefull.dasom_app_demo.domain.user.repository.UserRepository;
+import com._thefull.dasom_app_demo.global.auth.LoginUser;
 import com._thefull.dasom_app_demo.global.exception.AppException;
 import com._thefull.dasom_app_demo.global.exception.ErrorCode;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.Year;
 
 @Service
 @Transactional
@@ -68,6 +71,13 @@ public class UserRegisterService {
 
         userRepository.save(user);
 
+    }
+
+    public UserRegisterResponseDTO findUser(LoginUser user) {
+        User findUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_USER, "사용자를 찾을 수 없습니다"));
+
+        return UserRegisterResponseDTO.of(findUser,user.getStore());
     }
 }
 
