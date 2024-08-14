@@ -41,13 +41,6 @@ public class JWTUtils {
                 .get("phoneNum",String.class);
     }
 
-    public String getEmail(String token){
-        return Jwts.parserBuilder().setSigningKey(key).build()
-                .parseClaimsJws(token)
-                .getBody()
-                .get("email",String.class);
-    }
-
     public String getStoreCode(String token){
         return Jwts.parserBuilder().setSigningKey(key).build()
                 .parseClaimsJws(token)
@@ -72,10 +65,9 @@ public class JWTUtils {
     public String createNewToken(CustomUserDetails dto, Long expiredMs){
         Claims claims= Jwts.claims();
         claims.put("name",dto.getUsername());
-        claims.put("email",dto.getEmail());
         claims.put("phoneNum", dto.getPhoneNum());
         claims.put("storeCode",dto.getStoreCode());
-        claims.put("profileImageUrl", dto.getProfileImageUrl());
+        claims.put("profileImageUrl", dto.getImgUrl());
 
         return Jwts.builder()
                 .setClaims(claims)
