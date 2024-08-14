@@ -66,27 +66,27 @@ public class MenuPromotion extends BaseEntity {
 
     // 프로모션 시작일
     @Column(name = "START_DATE")
-    private LocalDate promoStartDate;
+    private LocalDate startDate;
 
     // 프로모션 종료일
     @Column(name = "END_DATE")
-    private LocalDate promoEndDate;
+    private LocalDate endDate;
 
     // 영업시간과 동일 여부
     @Column(name = "IS_EQL_OPR_TIME")
-    private Boolean boolEqlOprTime;
+    private Boolean isEqlOprTime;
 
     // 프로모션 시작 시간
     @Column(name = "START_TIME")
-    private LocalTime promoStartTime;
+    private LocalTime startTime;
 
     // 프로모션 종료 시간
     @Column(name = "END_TIME")
-    private LocalTime promoEndTime;
+    private LocalTime endTime;
 
     // 행사시간과 동일 여부
     @Column(name = "IS_EQL_PROMO_TIME")
-    private Boolean boolEqlPromoTime;
+    private Boolean isEqlPromoTime;
 
     // 멘트 발화 시간
     @Column(name = "MENT_START_TIME")
@@ -102,7 +102,7 @@ public class MenuPromotion extends BaseEntity {
 
     // 프로모션 소개 추가 여부
     @Column(name = "IS_ADD_DESC")
-    private Boolean boolAddMenuDesc;
+    private Boolean isAddMenuDesc;
 
     // 프로모션 추가 소개
     @Column(name = "ADD_DESC", columnDefinition = "TINYTEXT")
@@ -110,7 +110,7 @@ public class MenuPromotion extends BaseEntity {
 
     // 할인 조건 추가 여부
     @Column(name = "IS_ADD_COND")
-    private Boolean boolAddDiscCond;
+    private Boolean isAddDiscCond;
 
     // 할인 조건 추가한 내용
     @Column(name = "ADD_DISC_COND", length = 1000)
@@ -135,7 +135,7 @@ public class MenuPromotion extends BaseEntity {
     }
 
     public void updateMenuPromotion(UpdateMenuPromotionRequestDTO dto, Menu menu){
-        Status _status = Status.determinStatusFromDate(dto.getPromoStartDate(), dto.getPromoEndDate());
+        Status _status = Status.determinStatusFromDate(dto.getStartDate(), dto.getEndDate());
         Status status = Status.fromStatusName(dto.getStatus());
 
         this.category=menu.getCategory();
@@ -143,18 +143,18 @@ public class MenuPromotion extends BaseEntity {
         this.discType=DiscType.fromName(dto.getDiscType());
         this.discVal=dto.getDiscVal();
         this.dateType= DateType.fromName(dto.getDateType());
-        this.promoStartDate=dto.getPromoStartDate();
-        this.promoEndDate=dto.getPromoEndDate();
-        this.boolEqlOprTime=dto.getBoolEqlOprTime();
-        this.promoStartTime = dto.getPromoStartTime();
-        this.promoEndTime=dto.getPromoEndTime();
-        this.boolEqlPromoTime=dto.getBoolEqlPromoTime();
+        this.startDate=dto.getStartDate();
+        this.endDate=dto.getEndDate();
+        this.isEqlOprTime=dto.getIsEqlOprTime();
+        this.startTime = dto.getStartTime();
+        this.endTime=dto.getEndTime();
+        this.isEqlPromoTime=dto.getIsEqlPromoTime();
         this.mentStartTime=dto.getMentStartTime();
         this.mentEndTime=dto.getMentEndTime();
         this.mentInterval=dto.getMentInterval();
-        this.boolAddDiscCond=dto.getBoolAddDiscCond();
+        this.isAddDiscCond=dto.getIsAddDiscCond();
         this.addDiscCond=dto.getAddDiscCond();
-        this.boolAddMenuDesc=dto.getBoolAddMenuDesc();
+        this.isAddMenuDesc=dto.getIsAddMenuDesc();
         this.addMenuDesc=dto.getAddMenuDesc();
         this.ment= dto.getMent();
         this.menu=menu;

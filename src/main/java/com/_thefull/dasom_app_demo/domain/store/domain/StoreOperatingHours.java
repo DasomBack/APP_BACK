@@ -27,7 +27,7 @@ public class StoreOperatingHours {
     private Day day;
 
     @Column(name = "is_opr")
-    private Boolean boolIsOpr;
+    private Boolean isOpr;
 
     @Column(name = "open_time")
     private LocalTime openTime;

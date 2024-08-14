@@ -36,18 +36,14 @@ public class CustomUserDetails implements UserDetails {
         return user.getPhoneNum();
     }
 
-    public String getEmail(){
-        return user.getEmail();
-    }
-
     public Store getStore(){
         return user.getStore();
     }
 
     public String getStoreCode() { return user.getStore().getCode(); }
 
-    public String getProfileImageUrl(){
-        return user.getProfileImageUrl();
+    public String getImgUrl(){
+        return user.getImgUrl();
     }
 
     @Override
