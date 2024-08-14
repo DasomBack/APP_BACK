@@ -10,6 +10,7 @@ import com._thefull.dasom_app_demo.domain.user.service.UserRegisterService;
 import com._thefull.dasom_app_demo.global.auth.AuthUser;
 import com._thefull.dasom_app_demo.global.auth.LoginUser;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +31,17 @@ public class UserRegisterController {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping
+    public ResponseEntity<UserRegisterResponseDTO> findUser(@AuthUser LoginUser user){
+        UserRegisterResponseDTO response= userRegisterService.findUser(user);
+
+        return ResponseEntity.ok().body(response);
+    }
+
     @PutMapping
     public ResponseEntity<UserRegisterResponseDTO> updateUser(@AuthUser LoginUser user,
                                                               @RequestBody final UpdateUserRequestDTO dto){
         Store store = user.getStore();
-
         UserRegisterResponseDTO response = userRegisterService.updateUser(user.getId(),store, dto);
         return ResponseEntity.ok().body(response);
     }
