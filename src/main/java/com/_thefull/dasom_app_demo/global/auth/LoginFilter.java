@@ -82,8 +82,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String responseBody = "{"
                 + "\"name\":\"" + principal.getUsername() + "\","
-                + "\"email\":\"" + principal.getEmail() + "\","
-                + "\"profileImageUrl\":\"" + principal.getProfileImageUrl() + "\","
+                + "\"profileImageUrl\":\"" + principal.getImgUrl() + "\","
                 + "\"phoneNum\":\"" + principal.getPhoneNum() + "\","
                 + "\"store\": {"
                 + "\"name\":\"" + principal.getStore().getName() + "\""

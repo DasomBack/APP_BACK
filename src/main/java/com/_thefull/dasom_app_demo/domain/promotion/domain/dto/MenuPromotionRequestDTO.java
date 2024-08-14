@@ -6,6 +6,7 @@ import com._thefull.dasom_app_demo.domain.promotion.domain.DateType;
 import com._thefull.dasom_app_demo.domain.promotion.domain.DiscType;
 import com._thefull.dasom_app_demo.domain.promotion.domain.MenuPromotion;
 import com._thefull.dasom_app_demo.domain.store.domain.Store;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -30,36 +31,40 @@ public class MenuPromotionRequestDTO {
 
     // 행사 기간 타입
     // 상시 : ALWAYS
-    // 2주 : WEEK2
-    // 1주 : WEEK1
+    // 2주 : TWO_WEEK
+    // 1주 : ONE_WEEK
     // 그 외 : OTHER
     private String dateType;
     // 행사 기간
-    private LocalDate promoStartDate;
-    private LocalDate promoEndDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     // 행사 시간
     // 영업시간과 동일 여부
-    private Boolean boolEqlOprTime;
+    private Boolean isEqlOprTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime promoStartTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime promoEndTime;
 
     // 멘트 발화 시간
     // 행사시간과 동일 여부
-    private Boolean boolEqlPromoTime;
+    private Boolean isEqlPromoTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime mentStartTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime mentEndTime;
 
     // 발화 횟수
     private Integer mentInterval;
 
     // 할인 조건 추가 여부
-    private Boolean boolAddDiscCond;
+    private Boolean isAddDiscCond;
     // 할인 추가 조건
     private String addDiscCond;
 
     // 제품 소개 추가 여부
-    private Boolean boolAddMenuDesc;
+    private Boolean isAddMenuDesc;
 
     // 제품 추가 소개
     private String addMenuDesc;
@@ -77,19 +82,19 @@ public class MenuPromotionRequestDTO {
                 .discType(DiscType.fromName(this.discType))
                 .discVal(this.discVal)
                 .dateType(DateType.fromName(this.dateType))
-                .promoStartDate(this.promoStartDate)
-                .promoEndDate(this.promoEndDate)
-                .boolEqlOprTime(this.boolEqlOprTime)
-                .promoStartTime(this.promoStartTime)
-                .promoEndTime(this.promoEndTime)
-                .boolEqlPromoTime(this.boolEqlPromoTime)
+                .startDate(this.startDate)
+                .endDate(this.endDate)
+                .isEqlOprTime(this.isEqlOprTime)
+                .startTime(this.promoStartTime)
+                .endTime(this.promoEndTime)
+                .isEqlPromoTime(this.isEqlPromoTime)
                 .mentStartTime(this.mentStartTime)
                 .mentEndTime(this.mentEndTime)
                 .mentInterval(this.mentInterval)
-                .boolAddDiscCond(this.boolAddDiscCond)
-                .addMenuDesc(this.addMenuDesc)
-                .boolAddDiscCond(this.boolAddDiscCond)
+                .isAddDiscCond(this.isAddDiscCond)
                 .addDiscCond(this.addDiscCond)
+                .addMenuDesc(this.addMenuDesc)
+                .isAddMenuDesc(this.isAddMenuDesc)
                 .ment(this.ment)
                 .store(store)
                 .build();

@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SimpleMenuPromoResponseDTO {
 
-    private Long menuPromoId;
+    private Long id;
 
     private String status;
 
     private String menuName;
 
-    private Integer menuPrice;
+    private Integer price;
     private Integer discPrice;
 
     private LocalDate startDate;
@@ -41,13 +41,13 @@ public class SimpleMenuPromoResponseDTO {
         }
 
         return SimpleMenuPromoResponseDTO.builder()
-                .menuPromoId(e.getId())
+                .id(e.getId())
                 .status(e.getStatus().name())
                 .menuName(e.getMenu().getName())
-                .menuPrice(e.getMenu().getPrice())
+                .price(e.getMenu().getPrice())
                 .discPrice(discPrice)
-                .startDate(e.getPromoStartDate())
-                .endDate(e.getPromoEndDate())
+                .startDate(e.getStartDate())
+                .endDate(e.getEndDate())
                 .build();
 
     }
