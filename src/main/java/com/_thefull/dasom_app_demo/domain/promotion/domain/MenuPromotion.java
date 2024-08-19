@@ -135,7 +135,6 @@ public class MenuPromotion extends BaseEntity {
     }
 
     public void updateMenuPromotion(UpdateMenuPromotionRequestDTO dto, Menu menu){
-        Status _status = Status.determinStatusFromDate(dto.getStartDate(), dto.getEndDate());
         Status status = Status.fromStatusName(dto.getStatus());
 
         this.category=menu.getCategory();
@@ -160,7 +159,5 @@ public class MenuPromotion extends BaseEntity {
         this.menu=menu;
 
     }
-
-
 
 }

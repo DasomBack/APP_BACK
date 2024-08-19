@@ -43,9 +43,9 @@ public class MenuPromotionRequestDTO {
     // 영업시간과 동일 여부
     private Boolean isEqlOprTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private LocalTime promoStartTime;
+    private LocalTime startTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private LocalTime promoEndTime;
+    private LocalTime endTime;
 
     // 멘트 발화 시간
     // 행사시간과 동일 여부
@@ -85,8 +85,8 @@ public class MenuPromotionRequestDTO {
                 .startDate(this.startDate)
                 .endDate(this.endDate)
                 .isEqlOprTime(this.isEqlOprTime)
-                .startTime(this.promoStartTime)
-                .endTime(this.promoEndTime)
+                .startTime(this.startTime)
+                .endTime(this.endTime)
                 .isEqlPromoTime(this.isEqlPromoTime)
                 .mentStartTime(this.mentStartTime)
                 .mentEndTime(this.mentEndTime)
@@ -98,8 +98,5 @@ public class MenuPromotionRequestDTO {
                 .ment(this.ment)
                 .store(store)
                 .build();
-
     }
-
-
 }
