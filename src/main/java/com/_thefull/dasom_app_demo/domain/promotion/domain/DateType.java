@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum DateType {
     ALWAYS(1, "상시"),
-    TWO_WEEK(2, "2주"),
+    TWO_WEEKS(2, "2주"),
     ONE_WEEK(3,"1주"),
     OTHER(4,"직접입력");
 
