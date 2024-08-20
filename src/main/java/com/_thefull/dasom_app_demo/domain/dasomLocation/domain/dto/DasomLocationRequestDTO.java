@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class DasomLocationRequestDTO {
@@ -13,11 +15,11 @@ public class DasomLocationRequestDTO {
     @NotBlank
     private String location;
 
-    private String leftSide;
-    private String rightSide;
-    private String leftFront;
-    private String rightFront;
-    private String front;
+    private List<String> leftSide;
+    private List<String> rightSide;
+    private List<String> leftFront;
+    private List<String> rightFront;
+    private List<String> front;
 
     public DasomLocation from(Robot robot){
         return DasomLocation.builder()
