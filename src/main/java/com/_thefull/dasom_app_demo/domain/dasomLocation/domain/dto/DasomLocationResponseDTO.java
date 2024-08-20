@@ -14,13 +14,13 @@ public class DasomLocationResponseDTO {
 
     private Long id;
     private String location;
-    private String leftSide;
-    private String rightSide;
-    private String leftFront;
-    private String rightFront;
-    private String front;
+    private List<String> leftSide;
+    private List<String> rightSide;
+    private List<String> leftFront;
+    private List<String> rightFront;
+    private List<String> front;
 
-    private boolean use;
+    private Boolean use;
 
     public static DasomLocationResponseDTO of(DasomLocation e){
         return DasomLocationResponseDTO.builder()
