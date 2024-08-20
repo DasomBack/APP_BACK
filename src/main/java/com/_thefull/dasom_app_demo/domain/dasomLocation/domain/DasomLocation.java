@@ -65,6 +65,7 @@ public class DasomLocation extends BaseEntity {
         this.rightSide=dto.getRightSide();
         this.leftFront=dto.getLeftFront();
         this.rightFront=dto.getRightFront();
+        this.front=dto.getFront();
         this.location= dto.getLocation();
 
     }
