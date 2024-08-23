@@ -74,6 +74,15 @@ public class MenuPromotionRequestDTO {
 
 
     public MenuPromotion from(Menu menu, Status status, Store store){
+        LocalDate startDate, endDate;
+        if (this.getDateType().equals("ALWAYS")){
+            startDate = LocalDate.now();
+            endDate=startDate.plusYears(1);
+        }else{
+            startDate=this.startDate;
+            endDate=this.endDate;
+        }
+
         return MenuPromotion.builder()
                 .use(true)
                 .menu(menu)
@@ -82,8 +91,8 @@ public class MenuPromotionRequestDTO {
                 .discType(DiscType.fromName(this.discType))
                 .discVal(this.discVal)
                 .dateType(DateType.fromName(this.dateType))
-                .startDate(this.startDate)
-                .endDate(this.endDate)
+                .startDate(startDate)
+                .endDate(endDate)
                 .isEqlOprTime(this.isEqlOprTime)
                 .startTime(this.startTime)
                 .endTime(this.endTime)
