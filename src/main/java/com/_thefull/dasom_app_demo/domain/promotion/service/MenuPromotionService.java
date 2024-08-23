@@ -92,10 +92,10 @@ public class MenuPromotionService {
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
 
         Status status;
-        if (dto.getDateType().equals("ALWAYS")){
+        if (dto.getDateType().equals("ALWAYS") && !dto.getStatus().equals("STOPPED")){
             status=Status.IN_PROGRESS;
         }else{
-            status = Status.determinStatusFromDate(dto.getStartDate(), dto.getEndDate());
+            status = Status.fromStatusName(dto.getStatus());
         }
 
         if(isValidUserForMenuPromotion(menuPromotion,user)){
@@ -110,7 +110,6 @@ public class MenuPromotionService {
     public MenuPromotionResponseDTO updateStatusOfMenuPromotion(LoginUser user, Long promotionId, String statusName) {
         MenuPromotion promotion = menuPromotionRepository.findById(promotionId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "제품 홍보를 찾을 수 없습니다"));
-
 
         Status status = Status.fromStatusName(statusName);
 
