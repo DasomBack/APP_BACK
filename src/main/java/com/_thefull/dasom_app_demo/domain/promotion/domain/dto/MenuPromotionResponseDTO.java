@@ -82,14 +82,12 @@ public class MenuPromotionResponseDTO {
         int discPrice=0;
         DiscType _discType = e.getDiscType();
         if(_discType==DiscType.PERCENT){
-            discPrice=price*(100-e.getDiscVal());
+            discPrice=price*((100-e.getDiscVal())/100);
         }else if(_discType==DiscType.PRICE){
             discPrice=price-e.getDiscVal();
         }else{
             discPrice=price;
         }
-
-
 
 
         return MenuPromotionResponseDTO.builder()
