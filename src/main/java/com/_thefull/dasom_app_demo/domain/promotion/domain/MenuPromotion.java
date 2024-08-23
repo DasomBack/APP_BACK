@@ -134,16 +134,23 @@ public class MenuPromotion extends BaseEntity {
         this.status=status;
     }
 
-    public void updateMenuPromotion(UpdateMenuPromotionRequestDTO dto, Menu menu){
-        Status status = Status.fromStatusName(dto.getStatus());
+    public void updateMenuPromotion(UpdateMenuPromotionRequestDTO dto, Menu menu,Status status){
+        LocalDate startDate, endDate;
+        if (dto.getDateType().equals("ALWAYS")){
+            startDate = LocalDate.now();
+            endDate=startDate.plusYears(1);
+        }else{
+            startDate=dto.getStartDate();
+            endDate=dto.getEndDate();
+        }
 
         this.category=menu.getCategory();
         this.status=status;
         this.discType=DiscType.fromName(dto.getDiscType());
         this.discVal=dto.getDiscVal();
         this.dateType= DateType.fromName(dto.getDateType());
-        this.startDate=dto.getStartDate();
-        this.endDate=dto.getEndDate();
+        this.startDate=startDate;
+        this.endDate=endDate;
         this.isEqlOprTime=dto.getIsEqlOprTime();
         this.startTime = dto.getStartTime();
         this.endTime=dto.getEndTime();
