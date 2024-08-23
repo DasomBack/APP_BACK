@@ -37,8 +37,6 @@ public class MenuPromotionsController {
 
         MenuPromotionResponseDTO response = menuPromotionService.findById(user,id);
 
-
-
         return ResponseEntity.ok().body(response);
 
     }
@@ -61,7 +59,6 @@ public class MenuPromotionsController {
                                                                                              @RequestParam(name = "category")String category,
                                                                                              @RequestParam(name = "status")String status){
 
-        System.out.println("MenuPromotionsController.findMenuPromoListByCategoryAndStatus");
 
         Store store = user.getStore();
         MenuPromotionListResponseDTO response=menuPromotionService.findMenuPromoListByCategoryAndStatus(store,category,status);
