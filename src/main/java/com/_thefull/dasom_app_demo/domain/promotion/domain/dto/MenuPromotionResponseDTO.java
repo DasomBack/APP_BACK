@@ -79,15 +79,17 @@ public class MenuPromotionResponseDTO {
     public static MenuPromotionResponseDTO from(MenuPromotion e){
         /* discPrice 계산 */
         int price = e.getMenu().getPrice();
-        int discPrice=0;
+        double discPrice=0;
         DiscType _discType = e.getDiscType();
         if(_discType==DiscType.PERCENT){
-            discPrice=price*((100-e.getDiscVal())/100);
+            discPrice=(double) price*((100.0-(double) e.getDiscVal())/100.0);
+            System.out.println(discPrice);
         }else if(_discType==DiscType.PRICE){
             discPrice=price-e.getDiscVal();
         }else{
             discPrice=price;
         }
+
 
 
         return MenuPromotionResponseDTO.builder()
@@ -97,7 +99,7 @@ public class MenuPromotionResponseDTO {
                 .category(e.getCategory().name())
                 .discType(e.getDiscType().name())
                 .discVal(e.getDiscVal())
-                .discPrice(discPrice)
+                .discPrice((int)discPrice)
                 .dateType(e.getDateType().name())
                 .startDate(e.getStartDate())
                 .endDate(e.getEndDate())
