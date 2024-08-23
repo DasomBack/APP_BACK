@@ -32,8 +32,12 @@ public class MenuPromotionService {
         Menu menu = menuRepository.findById(dto.getMenuId())
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
 
-        Status status = Status.determinStatusFromDate(dto.getStartDate(), dto.getEndDate());
-
+        Status status;
+        if (dto.getDateType().equals("ALWAYS")){
+            status=Status.IN_PROGRESS;
+        }else{
+            status = Status.determinStatusFromDate(dto.getStartDate(), dto.getEndDate());
+        }
 
         MenuPromotion newPromotion = dto.from(menu, status, store);
 
@@ -55,8 +59,6 @@ public class MenuPromotionService {
     public MenuPromotionListResponseDTO findMenuPromoListByCategoryAndStatus(Store store, String categoryName, String statusName) {
         Category category = Category.fromCategoryName(categoryName);
         Status status = Status.fromStatusName(statusName);
-
-        System.out.println(categoryName+ statusName);
 
         List<MenuPromotion> menuPromotionList;
 
@@ -89,8 +91,15 @@ public class MenuPromotionService {
         Menu menu = menuRepository.findById(dto.getMenuId())
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
 
+        Status status;
+        if (dto.getDateType().equals("ALWAYS")){
+            status=Status.IN_PROGRESS;
+        }else{
+            status = Status.determinStatusFromDate(dto.getStartDate(), dto.getEndDate());
+        }
+
         if(isValidUserForMenuPromotion(menuPromotion,user)){
-            menuPromotion.updateMenuPromotion(dto,menu);
+            menuPromotion.updateMenuPromotion(dto,menu,status);
             MenuPromotion saved = menuPromotionRepository.save(menuPromotion);
             return MenuPromotionResponseDTO.from(saved);
 
@@ -102,7 +111,7 @@ public class MenuPromotionService {
         MenuPromotion promotion = menuPromotionRepository.findById(promotionId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "제품 홍보를 찾을 수 없습니다"));
 
-        System.out.println(statusName);
+
         Status status = Status.fromStatusName(statusName);
 
         System.out.println(status);
