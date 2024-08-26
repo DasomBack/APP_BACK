@@ -14,6 +14,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
 
 @Entity
 @Table(name = "MENU_PROMOTIONS")
@@ -138,7 +139,7 @@ public class MenuPromotion extends BaseEntity {
         LocalDate startDate, endDate;
         if (dto.getDateType().equals("ALWAYS")){
             startDate = LocalDate.now();
-            endDate=startDate.plusYears(1);
+            endDate=startDate.with(TemporalAdjusters.lastDayOfYear());
         }else{
             startDate=dto.getStartDate();
             endDate=dto.getEndDate();
