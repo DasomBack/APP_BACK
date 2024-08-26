@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
 
 @Getter
 @NoArgsConstructor
@@ -77,7 +78,7 @@ public class MenuPromotionRequestDTO {
         LocalDate startDate, endDate;
         if (this.getDateType().equals("ALWAYS")){
             startDate = LocalDate.now();
-            endDate=startDate.plusYears(1);
+            endDate= startDate.with(TemporalAdjusters.lastDayOfYear());
         }else{
             startDate=this.startDate;
             endDate=this.endDate;
