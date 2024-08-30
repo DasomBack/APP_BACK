@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EnableJpaAuditing
 @SpringBootApplication
-
 public class DasomAppDemoApplication {
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(DasomAppDemoApplication.class, args);
