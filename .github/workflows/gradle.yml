@@ -57,7 +57,7 @@ jobs:
         key: ${{ secrets.SERVER_SECRET }}
         port: 22
         script: |
-          # docker stop backendc
+          docker stop backendc
           docker rm $(docker ps -a --filter "status=exited" -q)
           docker rmi ${{ secrets.DOCKER_USERNAME }}/cafebot
 
