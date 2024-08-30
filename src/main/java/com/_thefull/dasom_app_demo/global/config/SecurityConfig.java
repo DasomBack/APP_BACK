@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/user/register","/login").permitAll()
+                        .requestMatchers("/user/register","/login","/openai/testchat").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JWTFilter(jwtUtils,userRepository,storeRepository), LoginFilter.class)
@@ -71,6 +71,7 @@ public class SecurityConfig {
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedOrigin("http://localhost:8080");
         configuration.addAllowedOrigin("https://api.dasom-cafebot-app.p-e.kr");
+        configuration.addAllowedOrigin("https://api.openai.com/v1/chat/completions");
         /* 프런트엔드 배포 url */
         // configuration.addAllowedOrigin("");
 
