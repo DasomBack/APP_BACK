@@ -18,17 +18,10 @@ public class ForMentOfMenuPromotionDTO {
     private String dateType;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Boolean isEqlOprTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime startTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime endTime;
-    private Boolean isEqlPromoTime;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private LocalTime mentStartTime;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private LocalTime mentEndTime;
-    private Integer mentInterval;
     private Boolean isAddDiscCond;
     private String addDiscCond;
     private Boolean isAddMenuDesc;
