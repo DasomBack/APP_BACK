@@ -26,5 +26,4 @@ public class ForMentOfMenuPromotionDTO {
     private String addDiscCond;
     private Boolean isAddMenuDesc;
     private String addMenuDesc;
-
 }
