@@ -47,9 +47,9 @@ public enum Status {
 
     public static Status determinStatusFromDate(LocalDate startDate, LocalDate endDate){
         LocalDate now = LocalDate.now();
-        if (startDate.isBefore(now))
+        if (now.isBefore(startDate))
             return Status.SCHEDULED;
-        else if(endDate.isAfter(now))
+        else if(now.isAfter(endDate))
             return Status.COMPLETED;
         else
             return Status.IN_PROGRESS;
