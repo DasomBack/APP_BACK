@@ -13,6 +13,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class ForMentOfMenuPromotionDTO {
     private Long menuId;
+
     private String discType;
     private Integer discVal;
     private String dateType;

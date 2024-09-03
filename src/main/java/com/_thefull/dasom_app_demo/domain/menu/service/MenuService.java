@@ -31,6 +31,15 @@ public class MenuService {
         else throw new AppException(ErrorCode.UNAUTHORIZED_USER, "메뉴를 찾을 수 없습니다");
     }
 
+    public Menu findMenuById(Store store, Long id){
+        Menu menu = menuRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
+        if (isValidStoreToMenu(store,menu))
+            return menu;
+        else throw new AppException(ErrorCode.UNAUTHORIZED_USER, "메뉴를 찾을 수 없습니다");
+
+    }
+
     public List<SimpleMenuResponseDTO> findAllByStore(Store store) {
         List<Menu> allByStore = menuRepository.findAllByStore(store);
         return allByStore.stream().map(SimpleMenuResponseDTO::of).collect(Collectors.toList());
@@ -42,8 +51,17 @@ public class MenuService {
     }
 
     public List<SimpleMenuResponseDTO> findByCategory(Store store, String category) {
-        List<Menu> searchedMenuList =menuRepository.findAllByStoreAndCategory(store, Category.fromCategoryName(category));
-        return searchedMenuList.stream().map(SimpleMenuResponseDTO::of).collect(Collectors.toList());
+
+        if (category.equals("ALL")){
+            List<Menu> allByStore = menuRepository.findAllByStore(store);
+            return allByStore.stream().map(SimpleMenuResponseDTO::of).collect(Collectors.toList());
+        }
+        else{
+            List<Menu> searchedMenuList =menuRepository.findAllByStoreAndCategory(store, Category.fromCategoryName(category));
+            return searchedMenuList.stream().map(SimpleMenuResponseDTO::of).collect(Collectors.toList());
+
+        }
+
 
 
     }
