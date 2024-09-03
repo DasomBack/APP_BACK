@@ -28,6 +28,10 @@ public class StoreService {
         return storeRepository.findById(storeId).orElseThrow(()->new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다"));
     }
 
+    public Store findByStoreCode(String storeCode){
+        return storeRepository.findByCode(storeCode).orElseThrow(()->new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다"));
+    }
+
 
     public StoreTimeResponseDTO findStoreOperatingTime(Store store) {
         int intVal = LocalDate.now().getDayOfWeek().getValue();
@@ -37,4 +41,5 @@ public class StoreService {
 
         return StoreTimeResponseDTO.from(todaysOperatingTime);
     }
+
 }

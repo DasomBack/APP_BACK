@@ -4,6 +4,7 @@ import com._thefull.dasom_app_demo.domain.menu.domain.dto.MenuResponseDTO;
 import com._thefull.dasom_app_demo.domain.menu.domain.dto.SimpleMenuResponseDTO;
 import com._thefull.dasom_app_demo.domain.menu.service.MenuService;
 import com._thefull.dasom_app_demo.domain.store.domain.Store;
+import com._thefull.dasom_app_demo.domain.store.service.StoreService;
 import com._thefull.dasom_app_demo.global.auth.AuthUser;
 import com._thefull.dasom_app_demo.global.auth.LoginUser;
 import lombok.Getter;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MenuController {
 
     private final MenuService menuService;
+    private final StoreService storeService;
 
     @GetMapping("/all")
     public ResponseEntity<List<SimpleMenuResponseDTO>> findAllMenuList(@AuthUser LoginUser user){
@@ -32,6 +34,8 @@ public class MenuController {
         return ResponseEntity.ok().body(response);
 
     }
+
+
 
     @GetMapping("/search")
     public ResponseEntity<List<SimpleMenuResponseDTO>> findSearchMenuList(@AuthUser LoginUser user,
