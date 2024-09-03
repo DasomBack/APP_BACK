@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/user/register","/login","/openai/testchat").permitAll()
+                        .requestMatchers("/user/register","/login","/openai/testchat","/bot/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JWTFilter(jwtUtils,userRepository,storeRepository), LoginFilter.class)

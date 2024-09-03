@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+/*
+* 카페봇 위치설정과 관련된 CRUD 컨트롤러 입니다.
+* 기본 매핑 URI 는 'settings/dasom-locations' 이며,
+* 조회 : 카페봇 위치 설정 전체 조회, id별 위치 설정 상세조회,
+*
+* */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/settings/dasom-locations")
