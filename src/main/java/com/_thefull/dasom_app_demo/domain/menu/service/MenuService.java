@@ -1,5 +1,6 @@
 package com._thefull.dasom_app_demo.domain.menu.service;
 
+import com._thefull.dasom_app_demo.domain.menu.domain.Category;
 import com._thefull.dasom_app_demo.domain.menu.domain.Menu;
 import com._thefull.dasom_app_demo.domain.menu.domain.dto.MenuResponseDTO;
 import com._thefull.dasom_app_demo.domain.menu.domain.dto.SimpleMenuResponseDTO;
@@ -40,9 +41,17 @@ public class MenuService {
         return searchedMenuList.stream().map(SimpleMenuResponseDTO::of).collect(Collectors.toList());
     }
 
+    public List<SimpleMenuResponseDTO> findByCategory(Store store, String category) {
+        List<Menu> searchedMenuList =menuRepository.findAllByStoreAndCategory(store, Category.fromCategoryName(category));
+        return searchedMenuList.stream().map(SimpleMenuResponseDTO::of).collect(Collectors.toList());
+
+
+    }
+
     private boolean isValidStoreToMenu(Store store, Menu menu){
         return store.getId()==menu.getStore().getId();
     }
+
 
 
 }
