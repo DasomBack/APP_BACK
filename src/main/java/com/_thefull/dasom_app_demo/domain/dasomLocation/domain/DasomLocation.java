@@ -12,7 +12,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
+/*
+*  -- 카페봇 위치설정 객체 --
+* DASOM_LOCATION 이름의 RDS 테이블과 직접적으로 매핑되는 엔티티 객체입니다.
+* 생성일과 수정일을 포함하는 BaseEntity를 상속받고 있으며,
+* ID는 DB 자동 생성, 다솜 위치와 앞/좌/우/오른쪽 앞/왼쪽 앞 에 대한 STRING 정보를 LIST로 변환하여 저장하고 있습니다.
+* USE 필드는 해당 위치설정의 사용 여부를 나타냅니다.
+* */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

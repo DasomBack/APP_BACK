@@ -51,6 +51,11 @@ public class DasomLocationService {
         Robot robot = robotRepository.findByStore(store)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_ROBOT, "로봇을 찾을 수 없습니다"));
 
+        List<DasomLocation> all = dasomLocationRepository.findAll();
+        for (DasomLocation a : all){
+            a.changeUse(false);
+        }
+
         DasomLocation newLocation = request.from(robot);
         DasomLocation savedNewLocation = dasomLocationRepository.save(newLocation);
 
@@ -98,6 +103,13 @@ public class DasomLocationService {
             if (use==dasomLocation.getUse())
                 throw new AppException(ErrorCode.ALREADY_SET,"이미 설정된 값입니다");
 
+            if (use==true){
+                List<DasomLocation> all = dasomLocationRepository.findAll();
+                for (DasomLocation a : all){
+                    a.changeUse(false);
+                }
+
+            }
             dasomLocation.changeUse(use);
             DasomLocation saved = dasomLocationRepository.save(dasomLocation);
 
