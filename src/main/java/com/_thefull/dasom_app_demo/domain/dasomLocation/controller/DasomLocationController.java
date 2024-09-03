@@ -15,10 +15,16 @@ import java.util.List;
 
 
 /*
+*  -- 카페봇 위치 설정 컨트롤러 --
 * 카페봇 위치설정과 관련된 CRUD 컨트롤러 입니다.
-* 기본 매핑 URI 는 'settings/dasom-locations' 이며,
-* 조회 : 카페봇 위치 설정 전체 조회, id별 위치 설정 상세조회,
+* 기본 매핑 URI 는 'settings/dasom-locations' 입니다.
 *
+* 조회 : 카페봇 위치 설정 전체 조회, id별 위치 설정 상세조회,
+* 생성 : 카페봇 위치 설정 생성
+* 수정 : 카페봇 위치 설정 상태 변경, 카페봇 위치 설정 내용 변경
+* 삭제 : 카페봇 위치 설정 삭제
+*
+* 해당 api는 사용자 로그인 후 발급되는 JWT가 필요한 API입니다.
 * */
 @RestController
 @RequiredArgsConstructor

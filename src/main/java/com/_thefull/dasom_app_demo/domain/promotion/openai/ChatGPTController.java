@@ -56,7 +56,7 @@ public class ChatGPTController {
 
     private String createPrompt(ForMentOfMenuPromotionDTO dto, String menuName, Menu menu){
         String prompt = "카페에서 할인 홍보 멘트를 만들려고 합니다. 메뉴 이름은 "+menuName+"이고,"
-                +dto.getDiscType() + "은 다음과 같고, 할인 값은 " + dto.getDiscVal() + "%입니다. "
+                +dto.getDiscType() + "은 다음과 같고, 할인하는 값은 " + dto.getDiscVal() + dto.getDiscType()+"입니다. "
                 + "할인기간은" + dto.getStartDate() + "부터 " + dto.getEndDate() + "까지 유효하며, "
                 + "할인 시간은" + dto.getStartTime() + "부터 " + dto.getEndTime() + "까지입니다. "
                 + (dto.getIsAddDiscCond() ? "추가 조건: " + dto.getAddDiscCond() + " " : "")
