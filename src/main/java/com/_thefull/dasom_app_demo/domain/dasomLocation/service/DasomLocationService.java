@@ -29,7 +29,7 @@ public class DasomLocationService {
     public List<DasomLocationResponseDTO> findAllDasomLocationList(Store store) {
         Robot robot = robotRepository.findByStore(store)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_ROBOT, "로봇을 찾을 수 없습니다"));
-        List<DasomLocation> locationList = dasomLocationRepository.findAllByRobot(robot);
+        List<DasomLocation> locationList = dasomLocationRepository.findAllByRobotOrderByUseDesc(robot);
         return DasomLocationResponseDTO.toDTOList(locationList);
 
     }

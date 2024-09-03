@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**/
+/*
+*  -- 카페봇 위치설정 request DTO --
+*  카페봇 위치 설정 등록 및 변경 시 사용되는 dto입니다.
+* */
 @Data
 @NoArgsConstructor
 public class DasomLocationRequestDTO {
