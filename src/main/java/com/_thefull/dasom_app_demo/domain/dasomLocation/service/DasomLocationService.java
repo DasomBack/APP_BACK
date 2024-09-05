@@ -18,6 +18,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+*  -- 카페봇 위치 설정 서비스 --
+*  카페봇 위치 설정 관련 infrastructure
+*
+*
+* */
 @Service
 @Slf4j @Transactional
 @RequiredArgsConstructor
